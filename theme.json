@@ -1,0 +1,435 @@
+{
+	"settings": {
+		"appearanceTools": true,
+		"color": {
+			"custom": true,
+			"customDuotone": true,
+			"customGradient": false,
+			"defaultDuotone": false,
+			"defaultGradients": false,
+			"defaultPalette": false,
+			"duotone": [
+				{
+					"colors": [
+						"#ffffff",
+						"#000000"
+					],
+					"name": "White on Black",
+					"slug": "white-on-black"
+				}
+			],
+			"palette": [
+				{
+					"color": "#ffffff",
+					"name": "White",
+					"slug": "white"
+				},
+				{
+					"color": "#f2f2f2",
+					"name": "Gray 90% Lighter",
+					"slug": "gray-90-lighter"
+				},
+				{
+					"color": "#e6e6e6",
+					"name": "Gray 80% Lighter",
+					"slug": "gray-80-lighter"
+				},
+				{
+					"color": "#d9d9d9",
+					"name": "Gray 70% Lighter",
+					"slug": "gray-70-lighter"
+				},
+				{
+					"color": "#cccccc",
+					"name": "Gray 60% Lighter",
+					"slug": "gray-60-lighter"
+				},
+				{
+					"color": "#c0c0c0",
+					"name": "Gray 50% Lighter",
+					"slug": "gray-50-lighter"
+				},
+				{
+					"color": "#b3b3b3",
+					"name": "Gray 40% Lighter",
+					"slug": "gray-40-lighter"
+				},
+				{
+					"color": "#a6a6a6",
+					"name": "Gray 30% Lighter",
+					"slug": "gray-30-lighter"
+				},
+				{
+					"color": "#999999",
+					"name": "Gray 20% Lighter",
+					"slug": "gray-20-lighter"
+				},
+				{
+					"color": "#8d8d8d",
+					"name": "Gray 10% Lighter",
+					"slug": "gray-10-lighter"
+				},
+				{
+					"color": "#808080",
+					"name": "Gray",
+					"slug": "gray"
+				},
+				{
+					"color": "#737373",
+					"name": "Gray 10% Darker",
+					"slug": "gray-10-darker"
+				},
+				{
+					"color": "#666666",
+					"name": "Gray 20% Darker",
+					"slug": "gray-20-darker"
+				},
+				{
+					"color": "#5a5a5a",
+					"name": "Gray 30% Darker",
+					"slug": "gray-30-darker"
+				},
+				{
+					"color": "#4d4d4d",
+					"name": "Gray 40% Darker",
+					"slug": "gray-40-darker"
+				},
+				{
+					"color": "#404040",
+					"name": "Gray 50% Darker",
+					"slug": "gray-50-darker"
+				},
+				{
+					"color": "#333333",
+					"name": "Gray 60% Darker",
+					"slug": "gray-60-darker"
+				},
+				{
+					"color": "#262626",
+					"name": "Gray 70% Darker",
+					"slug": "gray-70-darker"
+				},
+				{
+					"color": "#1a1a1a",
+					"name": "Gray 80% Darker",
+					"slug": "gray-80-darker"
+				},
+				{
+					"color": "#0d0d0d",
+					"name": "Gray 90% Darker",
+					"slug": "gray-90-darker"
+				},
+				{
+					"color": "#000000",
+					"name": "Black",
+					"slug": "black"
+				},
+				{
+					"color": "#e6eeff",
+					"name": "Primary 90% Lighter",
+					"slug": "primary-90-lighter"
+				},
+				{
+					"color": "#ccddff",
+					"name": "Primary 80% Lighter",
+					"slug": "primary-80-lighter"
+				},
+				{
+					"color": "#b3ccff",
+					"name": "Primary 70% Lighter",
+					"slug": "primary-70-lighter"
+				},
+				{
+					"color": "#99bbff",
+					"name": "Primary 60% Lighter",
+					"slug": "primary-60-lighter"
+				},
+				{
+					"color": "#80aaff",
+					"name": "Primary 50% Lighter",
+					"slug": "primary-50-lighter"
+				},
+				{
+					"color": "#6699ff",
+					"name": "Primary 40% Lighter",
+					"slug": "primary-40-lighter"
+				},
+				{
+					"color": "#4d88ff",
+					"name": "Primary 30% Lighter",
+					"slug": "primary-30-lighter"
+				},
+				{
+					"color": "#3377ff",
+					"name": "Primary 20% Lighter",
+					"slug": "primary-20-lighter"
+				},
+				{
+					"color": "#1a66ff",
+					"name": "Primary 10% Lighter",
+					"slug": "primary-10-lighter"
+				},
+				{
+					"color": "#0055ff",
+					"name": "Primary",
+					"slug": "primary"
+				},
+				{
+					"color": "#004de6",
+					"name": "Primary 10% Darker",
+					"slug": "primary-10-darker"
+				},
+				{
+					"color": "#0044cc",
+					"name": "Primary 20% Darker",
+					"slug": "primary-20-darker"
+				},
+				{
+					"color": "#003bb3",
+					"name": "Primary 30% Darker",
+					"slug": "primary-30-darker"
+				},
+				{
+					"color": "#003399",
+					"name": "Primary 40% Darker",
+					"slug": "primary-40-darker"
+				},
+				{
+					"color": "#002b80",
+					"name": "Primary 50% Darker",
+					"slug": "primary-50-darker"
+				},
+				{
+					"color": "#002266",
+					"name": "Primary 60% Darker",
+					"slug": "primary-60-darker"
+				},
+				{
+					"color": "#00194c",
+					"name": "Primary 70% Darker",
+					"slug": "primary-70-darker"
+				}
+			]
+		},
+		"layout": {
+			"contentSize": "min(calc(100% - var(--wp--preset--spacing--xl,2rem)), 1000px)",
+			"wideSize": "min(calc(100% - var(--wp--preset--spacing--xl,2rem)), 1500px)"
+		},
+		"spacing": {
+			"units": [
+				"%",
+				"px",
+				"em",
+				"rem",
+				"vh",
+				"vw"
+			]
+		},
+		"typography": {
+			"defaultFontSizes": false,
+			"fluid": true,
+			"fontFamilies": [
+				{
+					"fontFamily": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+					"name": "System Font",
+					"slug": "system-font"
+				}
+			],
+			"fontSizes": [
+				{
+					"fluid": {
+						"max": "4.2rem",
+						"min": "3.0rem"
+					},
+					"name": "3X Large",
+					"size": "3.6rem",
+					"slug": "xxxl"
+				},
+				{
+					"fluid": {
+						"max": "3.4rem",
+						"min": "2.6rem"
+					},
+					"name": "2X Large",
+					"size": "3.0rem",
+					"slug": "xxl"
+				},
+				{
+					"fluid": {
+						"max": "3.0rem",
+						"min": "2.2rem"
+					},
+					"name": "X Large",
+					"size": "2.6rem",
+					"slug": "xl"
+				},
+				{
+					"fluid": {
+						"max": "2.4rem",
+						"min": "2.0rem"
+					},
+					"name": "Large",
+					"size": "2.2rem",
+					"slug": "lg"
+				},
+				{
+					"fluid": {
+						"max": "1.7rem",
+						"min": "1.3rem"
+					},
+					"name": "Medium",
+					"size": "1.5rem",
+					"slug": "md"
+				},
+				{
+					"fluid": {
+						"max": "1.25rem",
+						"min": "1.0em"
+					},
+					"name": "Normal",
+					"size": "1.0em",
+					"slug": "norm"
+				},
+				{
+					"fluid": {
+						"max": "0.9rem",
+						"min": "0.75rem"
+					},
+					"name": "Small",
+					"size": "0.8rem",
+					"slug": "sm"
+				},
+				{
+					"fluid": {
+						"max": "0.75rem",
+						"min": "0.65rem"
+					},
+					"name": "X Small",
+					"size": "0.7rem",
+					"slug": "xs"
+				}
+			]
+		},
+		"useRootPaddingAwareAlignments": true
+	},
+	"styles": {
+		"blocks": {
+			"core/button": {
+				"border": {
+					"radius": "5px"
+				}
+			},
+			"core/heading": {
+				"spacing": {
+					"margin": {
+						"bottom": "1em",
+						"top": "3em"
+					}
+				},
+				"typography": {
+					"letterSpacing": "-0.1px",
+					"lineHeight": "1.1"
+				}
+			},
+			"core/list-item": {
+				"spacing": {
+					"margin": {
+						"bottom": "var(--wp--preset--spacing--20)"
+					}
+				}
+			},
+			"core/quote": {
+				"border": {
+					"radius": "0.25em"
+				},
+				"color": {
+					"background": "var(--wp--preset--color--gray-90-lighter)"
+				},
+				"spacing": {
+					"padding": "2em"
+				},
+				"typography": {
+					"fontSize": "0.9em"
+				}
+			},
+			"core/separator": {
+				"border": {
+					"top": {
+						"color": "var(--wp--preset--color--gray)",
+						"width": "1px"
+					}
+				},
+				"color": {
+					"background": "var(--wp--preset--color--black)"
+				},
+				"spacing": {
+					"margin": {
+						"bottom": "var(--wp--preset--spacing--80)",
+						"top": "var(--wp--preset--spacing--80)"
+					}
+				}
+			},
+			"core/site-tagline": {
+				"color": {
+					"text": "var(--wp--preset--color--gray-30-lighter)"
+				},
+				"elements": {
+					"link": {
+						"color": {
+							"text": "var(--wp--preset--color--gray-30-lighter)"
+						}
+					}
+				},
+				"spacing": {
+					"margin": "0"
+				},
+				"typography": {
+					"fontStyle": "italic"
+				}
+			},
+			"core/site-title": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--md)",
+					"fontWeight": "700"
+				}
+			}
+		},
+		"elements": {
+			"heading": {
+				"typography": {
+					"fontStyle": "normal",
+					"fontWeight": "600",
+					"letterSpacing": "-0.2px",
+					"lineHeight": "1.1"
+				}
+			},
+			"link": {
+				":hover": {
+					"color": {
+						"text": "var(--wp--preset--color--primary-20-darker)"
+					}
+				},
+				"color": {
+					"text": "var(--wp--preset--color--primary)"
+				}
+			}
+		},
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--system-font)",
+			"fontSize": "var(--wp--preset--font-size--norm)",
+			"lineHeight": "1.4"
+		}
+	},
+	"templateParts": [
+		{
+			"area": "header",
+			"name": "Header"
+		},
+		{
+			"area": "footer",
+			"name": "Footer"
+		}
+	],
+	"version": 3,
+	"$schema": "https://schemas.wp.org/wp/6.8/theme.json"
+}
