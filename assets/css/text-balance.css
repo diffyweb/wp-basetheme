@@ -1,0 +1,27 @@
+/**
+ * Text balancing utility.
+ *
+ * Enables native CSS text-wrap: balance on every heading and on any
+ * element tagged with the .text-balance utility class. The legacy
+ * .balance-text class (the default selector from the former
+ * vanilla-balance-text JS init) is kept as a backward-compat alias
+ * so existing markup continues to work with no content changes.
+ *
+ * .text-balance is the canonical class — it matches the stylesheet,
+ * enqueue handle, and "text-balance" naming used across the theme.
+ *
+ * Progressive enhancement: browsers without text-wrap: balance
+ * (pre-Chrome 114, pre-Firefox 121, pre-Safari 17.5) simply fall
+ * back to normal wrapping.
+ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.text-balance,
+.balance-text {
+	text-wrap: balance;
+}

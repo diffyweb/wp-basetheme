@@ -14,7 +14,7 @@ Not a parent theme -- intended to be copied and modified directly.
 - **theme.json v3** for all design tokens (colors, typography, spacing, layout)
 - **Block markup HTML** templates and template parts (no PHP template files)
 - **PHP** only in `functions.php` + modular `inc/<category>/` files (shortcodes, enqueues, block modifications)
-- **vanilla-balance-text** JS library vendored locally at `assets/js/vendor/balancetext.min.js`
+- **Narrow utility stylesheets** in `assets/css/*.css` enqueued via `inc/enqueues/*.php` (one per concern). First one: native `text-wrap: balance` for headings. No JS, no vendored libraries.
 - No build tools, no CSS preprocessor, no bundler, no node dependencies
 
 ## Directory structure
@@ -31,13 +31,12 @@ wp-basetheme/
       shortcode-current-year.php         # [current_year]
       shortcode-site-title.php           # [site_title]
     enqueues/
-      enqueue-balance-text.php           # Registers vendored balance-text + inline init
+      enqueue-text-balance.php           # Enqueues assets/css/text-balance.css
     block-mods/
       block-mod-spacing-supports.php     # Enables margin/padding on template-part + post-content
   assets/
-    js/
-      vendor/
-        balancetext.min.js               # Vendored vanilla-balance-text (pinned commit 30adf5e9)
+    css/
+      text-balance.css                   # text-wrap: balance on h1-h6 + .text-balance (+ legacy .balance-text alias)
   templates/
     index.html         # Fallback post-list grid with pagination
     front-page.html    # Static front page -- same grid layout with top spacer
@@ -57,7 +56,7 @@ wp-basetheme/
   - `shortcodes/` — `add_shortcode()` registrations, one shortcode per file.
   - `enqueues/` — asset enqueueing (scripts, styles, fonts, inline blobs).
   - `block-mods/` — block-layer modifications (register_block_type_args filters, `register_block_style()`, `unregister_block_type()`, `render_block` filters, block variations, pattern registration).
-- **Filename pattern**: `<category-singular>-<feature>.php` (e.g., `shortcode-current-year.php`, `enqueue-balance-text.php`, `block-mod-spacing-supports.php`). Redundant with the parent dir by design — the filename alone reads clearly in grep output, stack traces, and open tabs.
+- **Filename pattern**: `<category-singular>-<feature>.php` (e.g., `shortcode-current-year.php`, `enqueue-text-balance.php`, `block-mod-spacing-supports.php`). Redundant with the parent dir by design — the filename alone reads clearly in grep output, stack traces, and open tabs.
 - **Function prefix**: `wp_basetheme_<category>_<feature>()` (e.g., `wp_basetheme_shortcode_current_year`). Named functions over closures so hooks can be removed and filenames match function names.
 - **File header**: each file starts with a short docblock, then `defined( 'ABSPATH' ) || exit;`, then the hook registration + function definition.
 - **Adding a new category**: just create `inc/<new-category>/` and drop a file in. The auto-loader will pick it up automatically.
@@ -78,7 +77,7 @@ This is a **block theme** -- WordPress renders pages entirely from block markup 
 - **functions.php** is a thin bootstrap that auto-loads every `inc/<category>/*.php` file. Current features live in:
   - `inc/shortcodes/shortcode-current-year.php` — `[current_year]` renders the four-digit year (timezone-aware via `wp_date()`)
   - `inc/shortcodes/shortcode-site-title.php` — `[site_title]` renders the site name from Settings
-  - `inc/enqueues/enqueue-balance-text.php` — registers the vendored `vanilla-balance-text` library and attaches an inline initializer that applies balancing to all `h1`-`h6` and `.balance-text` elements on load and resize
+  - `inc/enqueues/enqueue-text-balance.php` — enqueues `assets/css/text-balance.css`, which applies native `text-wrap: balance` to all `h1`-`h6` and any element with the `.text-balance` utility class (or its legacy alias `.balance-text`)
   - `inc/block-mods/block-mod-spacing-supports.php` — enables margin/padding controls on `core/template-part` and `core/post-content`
 
 ## Scripts / Key files
@@ -88,9 +87,9 @@ This is a **block theme** -- WordPress renders pages entirely from block markup 
 | `theme.json` | All design tokens, block styles, template part registration. The single source of truth for colors, fonts, spacing, and layout. |
 | `functions.php` | Thin bootstrap that `require_once`s every `inc/<category>/*.php` via a `glob()` auto-loader. |
 | `inc/shortcodes/*.php` | One file per shortcode. Currently `[current_year]` and `[site_title]`. |
-| `inc/enqueues/*.php` | Asset enqueue logic. Currently the vendored `balance-text` script + inline initializer. |
+| `inc/enqueues/*.php` | Asset enqueue logic. Currently the `text-balance.css` stylesheet. |
 | `inc/block-mods/*.php` | Block-layer modifications (supports, styles, unregistrations, render filters). Currently spacing supports for `core/template-part` and `core/post-content`. |
-| `assets/js/vendor/balancetext.min.js` | Vendored `vanilla-balance-text` library (pinned to upstream commit 30adf5e9, 2016-12-16 — upstream has been dormant since 2016). |
+| `assets/css/text-balance.css` | Narrow utility stylesheet: `text-wrap: balance` on headings, `.text-balance`, and legacy `.balance-text`. Progressive enhancement — falls back to normal wrap where unsupported. |
 | `style.css` | Theme metadata header only (name, version, requirements). Contains no CSS rules -- all styling is in theme.json. |
 | `templates/single.html` | Single post template with featured-image cover block (70% dim overlay). |
 | `templates/index.html` | Default post-list: responsive grid (min 15rem columns), featured images, titles, pagination. |
@@ -99,12 +98,13 @@ This is a **block theme** -- WordPress renders pages entirely from block markup 
 
 ## Key conventions
 
-- **No custom CSS.** All styling goes through `theme.json` design tokens and block-level style settings. `style.css` is metadata-only.
+- **Design tokens live in `theme.json`.** Colors, typography, spacing, layout, and block-level style overrides all belong there. `style.css` stays metadata-only.
+- **Narrow CSS utilities may be enqueued.** Small, single-purpose stylesheets that can't be expressed as design tokens (e.g., `text-wrap: balance` on headings) live under `assets/css/<feature>.css` and are enqueued via a matching `inc/enqueues/enqueue-<feature>.php` file. Keep each stylesheet focused on one concern — no catch-all `main.css`. If something *can* be expressed as a theme.json design token, it still belongs there.
 - **Block markup only.** Templates are pure WordPress block comments in HTML. No PHP template tags, no `the_content()` calls, no template hierarchy hacks.
 - **Fluid typography.** Every font size has `min`/`max` fluid values. Do not use fixed sizes.
 - **Color palette naming.** Grayscale uses `gray-{N}-lighter` / `gray-{N}-darker` pattern. Primary uses `primary-{N}-lighter` / `primary-{N}-darker`. Base colors are `white`, `black`, `gray`, `primary`.
 - **Shortcodes over hardcoded values.** Use `[current_year]` in footer copyright rather than a hardcoded year.
-- **Vendor third-party JS locally.** Place vendored libraries under `assets/js/vendor/` and record the upstream commit hash in the enqueue file's docblock. No CDN dependencies.
+- **Prefer native platform features over JS libraries.** Before vendoring or enqueueing a script, check whether a native CSS / HTML feature covers the use case. If a third-party JS dependency is still required, vendor it locally under `assets/js/vendor/` with the upstream commit hash in the enqueue file's docblock — no CDN dependencies.
 - **One feature per inc/ file.** Shortcodes, enqueues, and block modifications each live in their own file under `inc/<category>/`. Filenames carry their category as a prefix (`shortcode-*.php`, `enqueue-*.php`, `block-mod-*.php`).
 - **Named, prefixed functions on hooks.** Use `wp_basetheme_<category>_<feature>` naming. No anonymous closures on `add_action` / `add_filter` — they can't be removed and obscure stack traces.
 - **Navigation blocks use `ref` IDs** that point to wp_navigation post IDs (will differ per WordPress install -- update after activation).
