@@ -1,10 +1,20 @@
 <?php
+/**
+ * wp-basetheme functions and definitions.
+ *
+ * Auto-loads every PHP file in inc/<category>/ so theme features live
+ * in focused, single-responsibility files. Drop a new file into any
+ * inc/<category>/ directory and it will be picked up on the next load.
+ *
+ * @package wp-basetheme
+ */
 
-// current year shortcode
-function current_year_shortcode() {
-	return date('Y');
+defined( 'ABSPATH' ) || exit;
+
+foreach ( (array) glob( get_theme_file_path( 'inc/*/*.php' ) ) as $wp_basetheme_include ) {
+	require_once $wp_basetheme_include;
 }
-add_shortcode('current_year', 'current_year_shortcode');
+unset( $wp_basetheme_include );
 
 // site title shortcode
 function site_title_shortcode() {
