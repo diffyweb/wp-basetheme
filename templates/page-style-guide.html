@@ -1,0 +1,374 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:spacer {"height":"var:preset|spacing|70"} -->
+<div style="height:var(--wp--preset--spacing--70)" aria-hidden="true" class="wp-block-spacer"></div>
+<!-- /wp:spacer -->
+
+<!-- wp:group {"tagName":"main","layout":{"type":"constrained"}} -->
+<main class="wp-block-group">
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Typography</h2>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":1} -->
+<h1 class="wp-block-heading">Heading one — the quick brown fox jumps</h1>
+<!-- /wp:heading -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Heading two — the quick brown fox jumps</h2>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Heading three — the quick brown fox jumps</h3>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">Heading four — the quick brown fox jumps</h4>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">Heading five — the quick brown fox jumps</h5>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":6} -->
+<h6 class="wp-block-heading">Heading six — the quick brown fox jumps</h6>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A standard paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Inline formatting: <strong>bold</strong>, <em>italic</em>, <s>strikethrough</s>, <code>inline code</code>, <a href="#">a link</a>, <mark style="background-color:rgba(255, 227, 120, 0.5);color:inherit">highlighted</mark>, <kbd>⌘K</kbd>, H<sub>2</sub>O, and E = mc<sup>2</sup>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"dropCap":true} -->
+<p class="has-drop-cap">A dropcap paragraph leads with an oversized first letter. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Lists</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Unordered list item one</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Unordered list item two</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Unordered list item three — slightly longer so you can see how wrapping behaves inside a list</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><!-- wp:list-item -->
+<li>Ordered list item one</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Ordered list item two</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Ordered list item three</li>
+<!-- /wp:list-item --></ol>
+<!-- /wp:list -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Nested list — top level item
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Nested child one</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Nested child two
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Grandchild item</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list --></li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list --></li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Another top level item</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Quotes</h2>
+<!-- /wp:heading -->
+
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><!-- wp:paragraph -->
+<p>Good typography is invisible. Bad typography is everywhere. The line between them is mostly about restraint, and restraint is mostly about choosing not to do the thing you could do.</p>
+<!-- /wp:paragraph --><cite>Anonymous, probably</cite></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:pullquote -->
+<figure class="wp-block-pullquote"><blockquote><p>A pullquote lifts a phrase out of body copy to land with more weight.</p><cite>Editorial design 101</cite></blockquote></figure>
+<!-- /wp:pullquote -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Code, preformatted, and verse</h2>
+<!-- /wp:heading -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>function greet( name ) {
+	return `Hello, ${ name }!`;
+}
+
+greet( 'world' );</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">Preformatted text preserves    multiple   spaces
+and hard   line   breaks
+exactly as they are typed.</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:verse -->
+<pre class="wp-block-verse">Roses are red,
+	Violets are blue,
+Block themes are tidy,
+	And so are you.</pre>
+<!-- /wp:verse -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Tables</h2>
+<!-- /wp:heading -->
+
+<!-- wp:table -->
+<figure class="wp-block-table"><table><thead><tr><th>Property</th><th>Value</th><th>Notes</th></tr></thead><tbody><tr><td>Content width</td><td>1000px</td><td>Constrained layout default</td></tr><tr><td>Wide width</td><td>1500px</td><td>Used by <code>alignwide</code></td></tr><tr><td>Root padding</td><td>fluid</td><td>Padding-aware alignments enabled</td></tr><tr><td>Typography</td><td>system stack</td><td>8 fluid font sizes</td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Buttons</h2>
+<!-- /wp:heading -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#">Primary button</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"is-style-outline"} -->
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="#">Outline button</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#">Another primary</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Images</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Demo images below are external placeholders from <code>picsum.photos</code> and exist only to populate this style guide. Replace or remove them as needed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://picsum.photos/seed/wpbt-default/1200/675" alt="Default-aligned demo image"/><figcaption class="wp-element-caption">Default alignment — respects the content width.</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"align":"wide","sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image alignwide size-large"><img src="https://picsum.photos/seed/wpbt-wide/1600/700" alt="Wide-aligned demo image"/><figcaption class="wp-element-caption">Wide alignment — stretches to the wide width.</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"align":"full","sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image alignfull size-large"><img src="https://picsum.photos/seed/wpbt-full/2000/700" alt="Full-aligned demo image"/><figcaption class="wp-element-caption">Full alignment — edge to edge.</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:gallery {"linkTo":"none","columns":3} -->
+<figure class="wp-block-gallery has-nested-images columns-3 is-cropped"><!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://picsum.photos/seed/wpbt-g1/800/800" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://picsum.photos/seed/wpbt-g2/800/800" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://picsum.photos/seed/wpbt-g3/800/800" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://picsum.photos/seed/wpbt-g4/800/800" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://picsum.photos/seed/wpbt-g5/800/800" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://picsum.photos/seed/wpbt-g6/800/800" alt=""/></figure>
+<!-- /wp:image --></figure>
+<!-- /wp:gallery -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Cover and media &amp; text</h2>
+<!-- /wp:heading -->
+
+<!-- wp:cover {"url":"https://picsum.photos/seed/wpbt-cover/1600/900","dimRatio":60,"minHeight":400,"align":"wide"} -->
+<div class="wp-block-cover alignwide" style="min-height:400px"><span aria-hidden="true" class="wp-block-cover__background has-background-dim-60 has-background-dim"></span><img class="wp-block-cover__image-background" alt="" src="https://picsum.photos/seed/wpbt-cover/1600/900" data-object-fit="cover"/><div class="wp-block-cover__inner-container"><!-- wp:heading {"textAlign":"center","level":2,"fontSize":"xxl"} -->
+<h2 class="wp-block-heading has-text-align-center has-xxl-font-size">Cover block headline</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center"} -->
+<p class="has-text-align-center">Stacked text and CTA over a dimmed background image.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
+<div class="wp-block-buttons"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#">Call to action</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div></div>
+<!-- /wp:cover -->
+
+<!-- wp:media-text {"mediaType":"image","mediaLink":"https://picsum.photos/seed/wpbt-mt/1200/900","align":"wide"} -->
+<div class="wp-block-media-text alignwide is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://picsum.photos/seed/wpbt-mt/1200/900" alt=""/></figure><div class="wp-block-media-text__content"><!-- wp:heading -->
+<h2 class="wp-block-heading">Media &amp; Text</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A two-column block with an image on one side and text on the other. It stacks on narrow viewports.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Good for feature rows, about sections, and anything that needs a picture anchored to a paragraph.</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:media-text -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Columns</h2>
+<!-- /wp:heading -->
+
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Column one</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Two-column layout. Columns collapse on narrow viewports by default.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Column two</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Each column is a container that can hold any block — paragraphs, lists, images, buttons.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:paragraph -->
+<p><strong>Three columns.</strong> Useful for feature grids and service lists.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:paragraph -->
+<p><strong>Second column.</strong> Same width, different content.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:paragraph -->
+<p><strong>Third column.</strong> Watch how the gap and stacking behave on narrow widths.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Interactive and structural</h2>
+<!-- /wp:heading -->
+
+<!-- wp:details -->
+<details class="wp-block-details"><summary>Click to expand a details block</summary><!-- wp:paragraph -->
+<p>Details and summary render a native HTML disclosure widget. Content inside is hidden until the summary is clicked. Useful for FAQs and collapsible asides — no JavaScript required.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+
+<!-- wp:separator {"className":"is-style-wide"} -->
+<hr class="wp-block-separator has-alpha-channel-opacity is-style-wide"/>
+<!-- /wp:separator -->
+
+<!-- wp:paragraph -->
+<p>Above: separator (wide variant). Below: separator (dots variant).</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:separator {"className":"is-style-dots"} -->
+<hr class="wp-block-separator has-alpha-channel-opacity is-style-dots"/>
+<!-- /wp:separator -->
+
+<!-- wp:paragraph -->
+<p>And a spacer (140px tall) follows below to show vertical rhythm.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:spacer {"height":"140px"} -->
+<div style="height:140px" aria-hidden="true" class="wp-block-spacer"></div>
+<!-- /wp:spacer -->
+
+<!-- wp:paragraph -->
+<p>End of spacer.</p>
+<!-- /wp:paragraph -->
+
+</main>
+<!-- /wp:group -->
+
+<!-- wp:spacer {"height":"var:preset|spacing|70"} -->
+<div style="height:var(--wp--preset--spacing--70)" aria-hidden="true" class="wp-block-spacer"></div>
+<!-- /wp:spacer -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

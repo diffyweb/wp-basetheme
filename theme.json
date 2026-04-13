@@ -420,6 +420,15 @@
 			"lineHeight": "1.4"
 		}
 	},
+	"customTemplates": [
+		{
+			"name": "page-style-guide",
+			"title": "Style Guide",
+			"postTypes": [
+				"page"
+			]
+		}
+	],
 	"templateParts": [
 		{
 			"area": "header",
