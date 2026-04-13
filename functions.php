@@ -16,12 +16,6 @@ foreach ( (array) glob( get_theme_file_path( 'inc/*/*.php' ) ) as $wp_basetheme_
 }
 unset( $wp_basetheme_include );
 
-// site title shortcode
-function site_title_shortcode() {
-	return get_bloginfo('name');
-}
-add_shortcode('site_title', 'site_title_shortcode');
-
 // enqueue balance-text script(s)
 add_action('wp_enqueue_scripts', 'enqueue_balance_text_script');
 function enqueue_balance_text_script() {
