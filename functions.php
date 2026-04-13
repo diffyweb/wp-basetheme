@@ -15,21 +15,3 @@ foreach ( (array) glob( get_theme_file_path( 'inc/*/*.php' ) ) as $wp_basetheme_
 	require_once $wp_basetheme_include;
 }
 unset( $wp_basetheme_include );
-
-add_filter('register_block_type_args', function($args, $name) {
-    if ($name === 'core/template-part') {
-        $args['supports'] = $args['supports'] ?? [];
-        $args['supports']['spacing'] = [
-            'margin'  => true,
-            'padding' => true,
-        ];
-    }
-    if ($name === 'core/post-content') {
-        $args['supports'] = $args['supports'] ?? [];
-        $args['supports']['spacing'] = [
-            'margin'  => true,
-            'padding' => true,
-        ];
-    }
-    return $args;
-}, 10, 2);
