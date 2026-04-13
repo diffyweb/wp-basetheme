@@ -33,3 +33,21 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 <?php }
 add_action('wp_footer', 'custom_balance_text_insertion', 20);
+
+add_filter('register_block_type_args', function($args, $name) {
+    if ($name === 'core/template-part') {
+        $args['supports'] = $args['supports'] ?? [];
+        $args['supports']['spacing'] = [
+            'margin'  => true,
+            'padding' => true,
+        ];
+    }
+    if ($name === 'core/post-content') {
+        $args['supports'] = $args['supports'] ?? [];
+        $args['supports']['spacing'] = [
+            'margin'  => true,
+            'padding' => true,
+        ];
+    }
+    return $args;
+}, 10, 2);
