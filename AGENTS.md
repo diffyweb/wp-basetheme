@@ -109,6 +109,22 @@ This is a **block theme** -- WordPress renders pages entirely from block markup 
 - **Named, prefixed functions on hooks.** Use `wp_basetheme_<category>_<feature>` naming. No anonymous closures on `add_action` / `add_filter` — they can't be removed and obscure stack traces.
 - **Navigation blocks use `ref` IDs** that point to wp_navigation post IDs (will differ per WordPress install -- update after activation).
 
+## Session Continuity
+
+If `SESSIONLOG.md` exists, read it at the start of every session. It contains handoff notes from prior sessions — what was done, current state, what's next, and lessons learned.
+
+**At session end**, update `SESSIONLOG.md`:
+- Add a new entry at the top (below the header) with format: `## YYYY-MM-DD — INITIALS — Scope`
+- Include four sections: `### What was done`, `### Current state`, `### What's next`, `### Lessons`
+- Bullets, not prose. Concise.
+- Keep all entries — history is cheap and useful for tracing when things happened
+- If the file gets unwieldy, add an `## Archive` section and fold older entries below it
+- If the file does not exist, carry on without it
+
+`context/` is a different artifact: it holds durable, topic-scoped decision logs (architectural decisions, research, ADRs) committed alongside the work they document. `SESSIONLOG.md` is the rolling handoff log. Do not conflate the two.
+
+If the `/session-search` skill is installed, use it to pull additional context when needed (e.g., searching for decisions or work from sessions older than what `SESSIONLOG.md` covers).
+
 ## Build / lint
 
 No build step. No linters configured. No npm/composer dependencies.
