@@ -14,7 +14,7 @@ Not a parent theme -- intended to be copied and modified directly.
 - **theme.json v3** for all design tokens (colors, typography, spacing, layout)
 - **Block markup HTML** templates and template parts (no PHP template files)
 - **PHP** only in `functions.php` + modular `inc/<category>/` files (shortcodes, enqueues, block modifications)
-- **Narrow utility stylesheets** in `assets/css/*.css` enqueued via `inc/enqueues/*.php` (one per concern). First one: native `text-wrap: balance` for headings. No JS, no vendored libraries.
+- **Narrow utility stylesheets** (optional convention): small single-concern CSS under `assets/css/*.css` enqueued via `inc/enqueues/*.php`. None ship by default. No JS, no vendored libraries — prefer native CSS or a focused companion plugin (e.g. [wp-balance-text](https://github.com/diffyweb/wp-balance-text) for `text-wrap: balance`).
 - No build tools, no CSS preprocessor, no bundler, no node dependencies
 
 ## Directory structure
@@ -30,13 +30,8 @@ wp-basetheme/
     shortcodes/
       shortcode-current-year.php         # [current_year]
       shortcode-site-title.php           # [site_title]
-    enqueues/
-      enqueue-text-balance.php           # Enqueues assets/css/text-balance.css
     block-mods/
       block-mod-spacing-supports.php     # Enables margin/padding on template-part + post-content
-  assets/
-    css/
-      text-balance.css                   # text-wrap: balance on h1-h6 + .text-balance (+ legacy .balance-text alias)
   templates/
     index.html         # Fallback post-list grid with pagination
     front-page.html    # Static front page -- same grid layout with top spacer
@@ -54,9 +49,9 @@ wp-basetheme/
 - **Auto-loading.** `functions.php` globs `inc/*/*.php` and `require_once`s each match. Drop a file into an existing category to add a feature — no registration step.
 - **Category directories** group by concern. Current categories:
   - `shortcodes/` — `add_shortcode()` registrations, one shortcode per file.
-  - `enqueues/` — asset enqueueing (scripts, styles, fonts, inline blobs).
   - `block-mods/` — block-layer modifications (register_block_type_args filters, `register_block_style()`, `unregister_block_type()`, `render_block` filters, block variations, pattern registration).
-- **Filename pattern**: `<category-singular>-<feature>.php` (e.g., `shortcode-current-year.php`, `enqueue-text-balance.php`, `block-mod-spacing-supports.php`). Redundant with the parent dir by design — the filename alone reads clearly in grep output, stack traces, and open tabs.
+  - `enqueues/` — *(conventional, none shipped)* asset enqueueing (scripts, styles, fonts, inline blobs). Create the dir when you need it.
+- **Filename pattern**: `<category-singular>-<feature>.php` (e.g., `shortcode-current-year.php`, `block-mod-spacing-supports.php`, or `enqueue-<feature>.php` if you add an enqueues category). Redundant with the parent dir by design — the filename alone reads clearly in grep output, stack traces, and open tabs.
 - **Function prefix**: `wp_basetheme_<category>_<feature>()` (e.g., `wp_basetheme_shortcode_current_year`). Named functions over closures so hooks can be removed and filenames match function names.
 - **File header**: each file starts with a short docblock, then `defined( 'ABSPATH' ) || exit;`, then the hook registration + function definition.
 - **Adding a new category**: just create `inc/<new-category>/` and drop a file in. The auto-loader will pick it up automatically.
@@ -77,7 +72,6 @@ This is a **block theme** -- WordPress renders pages entirely from block markup 
 - **functions.php** is a thin bootstrap that auto-loads every `inc/<category>/*.php` file. Current features live in:
   - `inc/shortcodes/shortcode-current-year.php` — `[current_year]` renders the four-digit year (timezone-aware via `wp_date()`)
   - `inc/shortcodes/shortcode-site-title.php` — `[site_title]` renders the site name from Settings
-  - `inc/enqueues/enqueue-text-balance.php` — enqueues `assets/css/text-balance.css`, which applies native `text-wrap: balance` to all `h1`-`h6` and any element with the `.text-balance` utility class (or its legacy alias `.balance-text`)
   - `inc/block-mods/block-mod-spacing-supports.php` — enables margin/padding controls on `core/template-part` and `core/post-content`
 
 ## Scripts / Key files
@@ -87,9 +81,7 @@ This is a **block theme** -- WordPress renders pages entirely from block markup 
 | `theme.json` | All design tokens, block styles, template part registration. The single source of truth for colors, fonts, spacing, and layout. |
 | `functions.php` | Thin bootstrap that `require_once`s every `inc/<category>/*.php` via a `glob()` auto-loader. |
 | `inc/shortcodes/*.php` | One file per shortcode. Currently `[current_year]` and `[site_title]`. |
-| `inc/enqueues/*.php` | Asset enqueue logic. Currently the `text-balance.css` stylesheet. |
 | `inc/block-mods/*.php` | Block-layer modifications (supports, styles, unregistrations, render filters). Currently spacing supports for `core/template-part` and `core/post-content`. |
-| `assets/css/text-balance.css` | Narrow utility stylesheet: `text-wrap: balance` on headings, `.text-balance`, and legacy `.balance-text`. Progressive enhancement — falls back to normal wrap where unsupported. |
 | `style.css` | Theme metadata header only (name, version, requirements). Contains no CSS rules -- all styling is in theme.json. |
 | `templates/single.html` | Single post template with featured-image cover block (70% dim overlay). |
 | `templates/index.html` | Default post-list: responsive grid (min 15rem columns), featured images, titles, pagination. |
@@ -99,7 +91,7 @@ This is a **block theme** -- WordPress renders pages entirely from block markup 
 ## Key conventions
 
 - **Design tokens live in `theme.json`.** Colors, typography, spacing, layout, and block-level style overrides all belong there. `style.css` stays metadata-only.
-- **Narrow CSS utilities may be enqueued.** Small, single-purpose stylesheets that can't be expressed as design tokens (e.g., `text-wrap: balance` on headings) live under `assets/css/<feature>.css` and are enqueued via a matching `inc/enqueues/enqueue-<feature>.php` file. Keep each stylesheet focused on one concern — no catch-all `main.css`. If something *can* be expressed as a theme.json design token, it still belongs there.
+- **Narrow CSS utilities may be enqueued.** Small, single-purpose stylesheets that can't be expressed as design tokens live under `assets/css/<feature>.css`, enqueued via a matching `inc/enqueues/enqueue-<feature>.php`. None ship by default. Keep each focused on one concern — no catch-all `main.css`. If a focused companion plugin already solves it (e.g. [wp-balance-text](https://github.com/diffyweb/wp-balance-text) for `text-wrap: balance`), prefer the plugin over a per-theme copy. If something *can* be a theme.json design token, it still belongs there.
 - **Block markup only.** Templates are pure WordPress block comments in HTML. No PHP template tags, no `the_content()` calls, no template hierarchy hacks.
 - **Fluid typography.** Every font size has `min`/`max` fluid values. Do not use fixed sizes.
 - **Color palette naming.** Grayscale uses `gray-{N}-lighter` / `gray-{N}-darker` pattern. Primary uses `primary-{N}-lighter` / `primary-{N}-darker`. Base colors are `white`, `black`, `gray`, `primary`.

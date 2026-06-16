@@ -23,7 +23,7 @@ Upload the theme directory to `wp-content/themes/` and activate in **Appearance 
 - `[current_year]` — renders the current year (timezone-aware via `wp_date()`)
 - `[site_title]` — renders the site name from Settings
 
-**Text balancing:** All headings (h1–h6) and any element with the `.text-balance` utility class get balanced wrapping via native CSS `text-wrap: balance`, shipped as a tiny enqueued stylesheet at `assets/css/text-balance.css`. The legacy `.balance-text` class name is kept as a backward-compat alias. No JavaScript; degrades gracefully to normal wrapping in browsers that don't yet support the property (Chrome 114+, Firefox 121+, Safari 17.5+).
+**Text balancing (companion plugin):** Heading/short-line balancing (`text-wrap: balance`) is provided by the **[wp-balance-text](https://github.com/diffyweb/wp-balance-text)** plugin, not the theme. It adds a *Balance* toggle to the editor's native Typography panel (per-block, composes with any block style variation) plus a **Settings → Balance Text** page to pick block types balanced by default (H1–H6 on out of the box). Install + activate it alongside this theme; the theme no longer ships its own text-balance stylesheet — one reusable home for the feature instead of a per-theme copy.
 
 **Block modifications:** `core/template-part` and `core/post-content` have spacing supports (margin + padding) enabled so they can be tuned from the Site Editor like any other block.
 
