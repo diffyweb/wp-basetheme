@@ -2,6 +2,7 @@
 
 ## 2026-06-15
 
+- **Make `block-mod-spacing-supports` additive (stop clobbering native support)** — the filter overwrote `supports.spacing` wholesale, which on WP 7.0 replaced `core/post-content`'s richer *native* spacing (it includes `blockGap`) with a poorer `{margin, padding}`. It now only backfills when the block declares no spacing support, so it fills the gap for `core/template-part` (and `core/post-content` on the 6.8 floor) without overwriting core where native support exists.
 - **Flush default block-gap seams between sections** — add a `theme.json` `styles.css` rule, `.wp-site-blocks > *, .wp-block-template-part > * { margin-block-start: 0; }`, so top-level sections (header part → content → footer part) and template-part children butt flush and each section's own padding carries the vertical rhythm. Overrides WP's zero-specificity `:where()` block-gap rule via real-class specificity (0,1,0 > 0,0,0), leaving *inner* block-gaps (inside groups/columns) intact. Deliberately avoids `styles.spacing.blockGap`, whose token is coupled to those inner gaps and would collapse them too. Complements the existing `block-mod-spacing-supports` filter (which adds the margin/padding *controls*); this controls the *default* seam.
 
 ## 2026-04-14
