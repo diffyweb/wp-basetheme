@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-06-15
+
+- **Flush default block-gap seams between sections** — add a `theme.json` `styles.css` rule, `.wp-site-blocks > *, .wp-block-template-part > * { margin-block-start: 0; }`, so top-level sections (header part → content → footer part) and template-part children butt flush and each section's own padding carries the vertical rhythm. Overrides WP's zero-specificity `:where()` block-gap rule via real-class specificity (0,1,0 > 0,0,0), leaving *inner* block-gaps (inside groups/columns) intact. Deliberately avoids `styles.spacing.blockGap`, whose token is coupled to those inner gaps and would collapse them too. Complements the existing `block-mod-spacing-supports` filter (which adds the margin/padding *controls*); this controls the *default* seam.
+
 ## 2026-04-14
 
 - **Session log capture** — initially saved as a per-file artifact under `context/2026-04-13-modularization-and-style-guide-session.md`, then corrected to the project-root `SESSIONLOG.md` convention used on sibling WP projects. `context/` is reserved for durable topic-scoped decision logs and research; `SESSIONLOG.md` is the rolling handoff log.

@@ -313,6 +313,7 @@
 		"useRootPaddingAwareAlignments": true
 	},
 	"styles": {
+		"css": "/* Flush section seams: real-class (0,1,0) beats WP's :where() block-gap; inner gaps stay. Sections butt; their own padding carries rhythm. */ .wp-site-blocks > *, .wp-block-template-part > * { margin-block-start: 0; }",
 		"blocks": {
 			"core/button": {
 				"border": {
