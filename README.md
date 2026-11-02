@@ -34,10 +34,10 @@ Upload the theme directory to `wp-content/themes/` and activate in **Appearance 
 To add a brand color, run the script and paste its output into the `palette` array in `theme.json`, after `black`:
 
 ```
-python3 bin/palette-ramp.py accent "Accent" "#e0457b"
+php bin/palette-ramp.php accent "Accent" "#e0457b"
 ```
 
-To check that every ramp in `theme.json` still matches the formula in the script: `python3 bin/palette-ramp.py --check theme.json`.
+To check that every ramp in `theme.json` still matches the formula in the script: `php bin/palette-ramp.php --check theme.json`.
 
 ## Architecture
 
