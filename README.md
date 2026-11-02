@@ -27,6 +27,18 @@ Upload the theme directory to `wp-content/themes/` and activate in **Appearance 
 
 **Block modifications:** `core/template-part` and `core/post-content` have spacing supports (margin + padding) enabled so they can be tuned from the Site Editor like any other block.
 
+## Palette
+
+`white`, `black` and the `gray` ramp stay on every site. Every brand color gets its full ramp, from 90% lighter to 90% darker in 10% steps (19 entries, slugs like `primary-30-lighter` and `primary-70-darker`), so any brand color can be tinted or shaded the same way.
+
+To add a brand color, run the script and paste its output into the `palette` array in `theme.json`, after `black`:
+
+```
+python3 bin/palette-ramp.py accent "Accent" "#e0457b"
+```
+
+To check that every ramp in `theme.json` still matches the formula: `python3 bin/palette-ramp.py --check theme.json`.
+
 ## Architecture
 
 `functions.php` is a thin bootstrap that auto-loads every PHP file under `inc/<category>/`. Features live in focused, single-responsibility files grouped by concern:

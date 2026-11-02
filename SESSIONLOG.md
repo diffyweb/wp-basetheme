@@ -9,7 +9,7 @@ Newest first. Update at the end of every session. See `AGENTS.md > Session Conti
 ### What was done
 - Worked out the palette formula: per-channel sRGB mix toward white or black, `round(c * (1 - n * 0.01))` for darker, `round(c + (255 - c) * n * 0.01)` for lighter, round-half-up. It reproduces all 34 existing primary and gray entries.
 - Added `primary-80-darker` (`#001133`) and `primary-90-darker` (`#000819`). Gray keeps its 80% and 90% darker steps (Michael, 2026-11-02: put them on every ramp for consistency).
-- Wrote the full-ramp rule and the formula into `AGENTS.md`; corrected its stale primary count. Version 0.2.0.
+- Moved the formula out of `AGENTS.md` into `bin/palette-ramp.py` (generator plus `--check`) and a README Palette section; `AGENTS.md` points to both. Corrected its stale primary count. Version 0.2.0.
 
 ### Current state
 - Branch `feature/brand-color-ramps-v2`, not pushed, not merged. Palette is 40 colors.

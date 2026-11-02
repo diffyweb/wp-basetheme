@@ -3,6 +3,7 @@
 ## 0.2.0 - 2026-11-02
 
 - **Brand colors carry the full tint and shade ramp** - add `primary-80-darker` (`#001133`) and `primary-90-darker` (`#000819`) so `primary` runs 90% lighter to 90% darker (19 entries), matching `gray`. Every ramp now has the same 19 steps, so a brand color added later gets the same ramp. Palette grows from 38 to 40 colors; nothing is removed. `AGENTS.md` states the rule (every ramp runs 90% lighter to 90% darker) and the exact formula used to generate it; its primary count (18; the file had 17) was stale and is corrected.
+- Add `bin/palette-ramp.py`, which prints the 19-entry ramp for a new brand color and checks every ramp in `theme.json` against the formula (`--check`). The README has a short Palette section; `AGENTS.md` just points to it.
 - Theme version set to 0.2.0 in `style.css` (it was 0.1.0 and untouched by earlier entries).
 
 ## 2026-06-15
