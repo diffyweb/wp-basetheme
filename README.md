@@ -51,7 +51,7 @@ Groups follow core: a Group inside another constrained container, such as a Grou
 
 `settings.typography.fluid.maxViewportWidth` is `1600px`, because fluid type otherwise takes its widest viewport from `wideSize`. Keep it if you change `wideSize`, or your font sizes change too.
 
-A site built from an older copy of this theme adopts this in theme.json (the two layout sizes, the root padding, `maxViewportWidth` and the cover padding), plus side padding `0` on any constrained cover its templates place at the top level, in a part or in a flow-layout `main`. Cover text moves too: a constrained cover's text goes from `1em` plus one root padding to one root padding inside its edge, a flow-layout cover's from `1em` to one root padding, a cover with its own side padding keeps it, and cover text held to the content width (on wide screens) doesn't move. Nested Groups line up with the text around them. Measure the site's pages before shipping.
+A site built from an older copy of this theme adopts this in theme.json (the two layout sizes, the root padding, `maxViewportWidth` and the cover padding), plus side padding `0` on any constrained cover its templates place at the top level, in a part or in a flow-layout `main`. Cover text moves too: a constrained cover's text goes from `1em` plus one root padding to one root padding inside its edge, a flow-layout cover's from `1em` to one root padding, a constrained cover with its own side padding goes from that padding plus one root padding to that padding (a flow-layout one doesn't move), and cover text held to the content width (on wide screens) doesn't move. Nested Groups line up with the text around them. Measure the site's pages before shipping.
 
 ## Architecture
 
