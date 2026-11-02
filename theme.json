@@ -335,8 +335,8 @@
 			"core/cover": {
 				"spacing": {
 					"padding": {
-						"left": "calc(1em + var(--wp--style--root--padding-left))",
-						"right": "calc(1em + var(--wp--style--root--padding-right))"
+						"left": "var(--wp--style--root--padding-left)",
+						"right": "var(--wp--style--root--padding-right)"
 					}
 				}
 			},
