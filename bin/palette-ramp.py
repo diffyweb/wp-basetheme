@@ -45,11 +45,15 @@ def ramp(slug, name, base_hex):
 def check(path):
     try:
         palette = json.load(open(path))["settings"]["color"]["palette"]
-    except (ValueError, KeyError, OSError) as err:
-        print(f"cannot read palette from {path}: {err.__class__.__name__}")
+        for entry in palette:
+            for key in ("slug", "name", "color"):
+                if not isinstance(entry[key], str):
+                    raise TypeError(f"palette entry has no text {key!r}")
+        by_slug = {p["slug"]: p for p in palette}
+        slugs = [p["slug"] for p in palette]
+    except (ValueError, KeyError, TypeError, OSError) as err:
+        print(f"cannot read palette from {path}: {err.__class__.__name__}: {err}")
         return 1
-    by_slug = {p["slug"]: p for p in palette}
-    slugs = [p["slug"] for p in palette]
     pattern = re.compile(r"^(.+)-(\d+)-(lighter|darker)$")
     bases = sorted({m.group(1) for s in by_slug if (m := pattern.match(s))})
     problems, checked = [], 0
@@ -66,7 +70,7 @@ def check(path):
             problems.append(f"{base}: ramp has no base color entry")
             continue
         color = by_slug[base]["color"]
-        if not re.fullmatch(r"#[0-9a-fA-F]{6}", color):
+        if not isinstance(color, str) or not re.fullmatch(r"#[0-9a-fA-F]{6}", color):
             problems.append(f"{base}: base color is not #rrggbb")
             continue
         expected = ramp(base, by_slug[base]["name"], color)
@@ -97,7 +101,7 @@ def main(argv):
         return check(argv[2])
     if len(argv) == 4 and re.fullmatch(r"#[0-9a-fA-F]{6}", argv[3]) and re.fullmatch(r"[a-z][a-z0-9]*(-[a-z0-9]+)*", argv[1]):
         for slug, name, color in ramp(argv[1], argv[2], argv[3]):
-            print("\t\t\t\t{\n\t\t\t\t\t\"color\": %s,\n\t\t\t\t\t\"name\": %s,\n\t\t\t\t\t\"slug\": %s\n\t\t\t\t}," % (json.dumps(color), json.dumps(name), json.dumps(slug)))
+            print("\t\t\t\t{\n\t\t\t\t\t\"color\": %s,\n\t\t\t\t\t\"name\": %s,\n\t\t\t\t\t\"slug\": %s\n\t\t\t\t}," % (json.dumps(color, ensure_ascii=False), json.dumps(name, ensure_ascii=False), json.dumps(slug, ensure_ascii=False)))
         return 0
     print(__doc__)
     return 2
