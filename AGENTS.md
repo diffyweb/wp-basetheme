@@ -64,7 +64,7 @@ This is a **block theme** -- WordPress renders pages entirely from block markup 
 - **Template parts** (`parts/*.html`) are reusable header/footer fragments.
 - **theme.json** is the central configuration file. It defines:
   - Color palette: 40 colors. `white`, `black`, a 19-step `gray` ramp and a 19-step `primary` ramp, each running `{slug}-90-lighter` through `{slug}-90-darker`
-  - Typography: system font stack, 8 fluid font sizes (xs through xxxl)
+  - Typography: system font stack and a 9-step fluid type scale mapped to h1 to h6 and body text; sizes, roles and the retuning rule are in the README "Type scale" section
   - Layout: content width 1000px, wide width 1500px (both with responsive `min()`)
   - Block-level style overrides for headings, buttons, quotes, separators, site-title, site-tagline
   - Root padding-aware alignments enabled
@@ -82,6 +82,7 @@ This is a **block theme** -- WordPress renders pages entirely from block markup 
 | `functions.php` | Thin bootstrap that `require_once`s every `inc/<category>/*.php` via a `glob()` auto-loader. |
 | `inc/shortcodes/*.php` | One file per shortcode. Currently `[current_year]` and `[site_title]`. |
 | `inc/block-mods/*.php` | Block-layer modifications (supports, styles, unregistrations, render filters). Currently spacing supports for `core/template-part` and `core/post-content`. |
+| `bin/palette-ramp.php` | Prints the 19-entry tint and shade ramp for a new brand color, and checks every ramp in `theme.json` against the formula (`--check`). Plain PHP, no WordPress load. See the README Palette section. |
 | `style.css` | Theme metadata header only (name, version, requirements). Contains no CSS rules -- all styling is in theme.json. |
 | `templates/single.html` | Single post template with featured-image cover block (70% dim overlay). |
 | `templates/index.html` | Default post-list: responsive grid (min 15rem columns), featured images, titles, pagination. |
@@ -120,6 +121,8 @@ If the `/session-search` skill is installed, use it to pull additional context w
 ## Build / lint
 
 No build step. No linters configured. No npm/composer dependencies.
+
+Palette check: `php bin/palette-ramp.php --check theme.json` verifies every color ramp in `theme.json`.
 
 To work on this theme:
 1. Copy/symlink the directory into a WordPress install at `wp-content/themes/wp-basetheme/`
