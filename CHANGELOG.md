@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.0 - 2026-11-02
+
+- The side gutter is now WordPress root padding: `styles.spacing.padding` left and right are `var:preset|spacing|40` (1rem), and `contentSize` and `wideSize` are plain `1000px` and `1500px`. Until now both widths were `min(calc(100% - var(--wp--preset--spacing--xl,2rem)), ...)`. That formula made the gutter (`spacing--xl` was never defined, so it was always the 2rem fallback, 1rem a side) and left root padding at zero, so `useRootPaddingAwareAlignments` did nothing. Pages look the same as before: on every page measured at 360 to 1440px wide, every block, line of text and font size sits where it did. <!-- voice-lint: ok (CSS variable names) -->
+- `settings.typography.fluid.maxViewportWidth` is `1600px`. Core's fluid type takes its widest viewport from `layout.wideSize` when it can read it. It couldn't read the `min()` value, so it used its 1600px default; a plain `1500px` would have made text up to about 1.8% wider from 768px up. Setting 1600px keeps every size as it was.
+- Covers get `calc(1em + root padding)` on the left and right (`styles.blocks.core/cover.spacing.padding`). Core pads every cover 1em, and the old formula inset a cover's content one gutter more. Root padding doesn't reach inside a cover that sits in a padded container (core zeroes nested root padding), so without this a cover's text would move 16px toward its edge. That's where covers usually go: post content, patterns, `main`.
+- Two template covers keep core's `1em` (side padding set on the block): the single-post hero in `single.html`, which sits outside any padded container, so core already gives its inner container the gutter; and the Style Guide cover, which uses flow layout, where the old formula never added a gutter inside.
+- The pagination group in `front-page.html`, `home.html`, `index.html` and `archive.html` gets side padding equal to the root padding. It's a constrained group inside a constrained `main`, so the old formula inset it one gutter more than the post grid, and root padding doesn't stack. Without this, pagination would move 16px out once a site has more than one page of posts.
+- One case doesn't carry over: a constrained Group nested inside another constrained container (a Group block dropped into post content, say) was inset one gutter more per level under the old formula. With root padding it lines up with the text around it, as core intends. Bringing the old inset back would mean padding every Group, flex and flow ones too. None of the measured pages has one.
+- Theme version set to 0.3.0 in `style.css`.
+
 ## 0.2.0 - 2026-11-02
 
 - **Brand colors carry the full tint and shade ramp** - add `primary-80-darker` (`#001133`) and `primary-90-darker` (`#000819`) so `primary` runs 90% lighter to 90% darker (19 entries), matching `gray`. Every ramp now has the same 19 steps, so a brand color added later gets the same ramp. Palette grows from 38 to 40 colors; nothing is removed. `AGENTS.md`'s primary count (18; the file had 17) was stale and is corrected.
