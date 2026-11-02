@@ -12,8 +12,8 @@ Newest first. Update at the end of every session. See `AGENTS.md > Session Conti
 - Wrote the full-ramp rule and the formula into `AGENTS.md`; corrected its stale primary count. Version 0.2.0.
 
 ### Current state
-- Branch `feature/brand-color-ramps`, not pushed, not merged. Palette is 40 colors.
-- The Diffyweb, Onfolio and Stratocus forks match the formula for their 80/90 darker entries; Caffaroma's are hand-picked.
+- Branch `feature/brand-color-ramps-v2`, not pushed, not merged. Palette is 40 colors.
+- Existing site themes copied from this one are unchanged; their palettes live in their own repos.
 
 ### What's next
 - Michael reviews and merges.
