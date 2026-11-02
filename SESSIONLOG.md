@@ -14,15 +14,15 @@ Newest first. Update at the end of every session. See `AGENTS.md > Session Conti
 
 ### Current state
 - Branch `feature/root-padding-gutter`, PR #3 open. Version 0.3.0, the same number PR #2 (type scale) uses; whichever merges second goes to 0.4.0 by hand and resolves the CHANGELOG, README and AGENTS conflicts.
-- Covers follow one rule except a constrained cover outside any padded container (`single.html`'s hero), whose text sits two root paddings in.
+- Every cover follows one rule: text one root padding inside its edge. A constrained cover outside any padded container sets its own side padding to 0 to get there (`single.html`'s hero does), because core also pads its inner container.
 
 ### What's next
-- Michael reviews #3 and decides whether the top-level cover exception needs a template change.
+- Michael reviews #3.
 - Measure a real site with the change before merging.
 
 ### Lessons
 - Core puts root padding on the outermost padded container only. Anything that leaned on the old formula's inset inside every constrained container (covers, nested Groups) either follows core or needs its own setting.
-- theme.json can't reach a cover's inner container, so it can't unify covers at the top level with covers in content.
+- theme.json can't reach a cover's inner container, so a cover at the top level needs its own side padding set to 0 in the template to match covers in content.
 
 ## 2026-11-02 — MC — Brand color ramps (0.2.0)
 
