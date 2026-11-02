@@ -17,7 +17,7 @@ Upload the theme directory to `wp-content/themes/` and activate in **Appearance 
 
 **Parts:** `header`, `footer`
 
-**theme.json:** 40-color palette (white, black, and gray and primary-blue ramps, each with 10% tints and shades from 90% lighter to 90% darker), 8 fluid font sizes over a system font stack, content width 1000px / wide width 1500px, root padding-aware alignments, block-level style overrides for headings, buttons, quotes, separators, site-title, and site-tagline. Custom gradients disabled; default palettes and gradients stripped.
+**theme.json:** 40-color palette (white, black, and gray and primary-blue ramps, each with 10% tints and shades from 90% lighter to 90% darker), 8 fluid font sizes over a system font stack, content width 1000px / wide width 1500px with a 1rem side gutter set as root padding (see Gutter below), block-level style overrides for headings, buttons, quotes, separators, site-title, and site-tagline. Custom gradients disabled; default palettes and gradients stripped.
 
 **Shortcodes** (one file per shortcode under `inc/shortcodes/`):
 - `[current_year]` — renders the current year (timezone-aware via `wp_date()`)
@@ -38,6 +38,18 @@ php bin/palette-ramp.php accent "Accent" "#e0457b"
 ```
 
 To check that every ramp in `theme.json` still matches the formula in the script: `php bin/palette-ramp.php --check theme.json`.
+
+## Gutter
+
+Text never touches the screen edge: there's a 1rem gutter on each side. It's WordPress root padding (`styles.spacing.padding` left and right, `var:preset|spacing|40`) with `useRootPaddingAwareAlignments` on, so full-width blocks still reach the edge. `contentSize` and `wideSize` are plain `1000px` and `1500px`. Change the gutter in that one place; never put it back into the widths.
+
+Root padding applies to the outermost padded container only, so three things carry the gutter where it would otherwise be lost:
+
+- Covers: `styles.blocks.core/cover.spacing.padding` is `calc(1em + var(--wp--style--root--padding-left))` (and the right). That's core's 1em plus the gutter, so cover text lines up with the text column. <!-- voice-lint: ok (CSS variable names) -->
+- A cover that keeps core's `1em` sets its own side padding on the block. Two templates do: `single.html`'s hero sits outside any padded container, where core already pads its inner container, and the Style Guide's cover uses flow layout.
+- The pagination group in `front-page`, `home`, `index` and `archive` sets side padding to `var(--wp--style--root--padding-left)` (and the right), because it's a constrained group nested in a constrained `main`. <!-- voice-lint: ok (CSS variable names) -->
+
+`settings.typography.fluid.maxViewportWidth` is `1600px`, because fluid type otherwise takes its widest viewport from `wideSize`. Keep it if you change `wideSize`, or your font sizes change too.
 
 ## Architecture
 
