@@ -4,6 +4,24 @@ Newest first. Update at the end of every session. See `AGENTS.md > Session Conti
 
 ---
 
+## 2026-11-02 — MC — Brand color ramps (0.2.0)
+
+### What was done
+- Worked out the palette formula: per-channel sRGB mix toward white or black, `round(c * (1 - n * 0.01))` for darker, `round(c + (255 - c) * n * 0.01)` for lighter, round-half-up. It reproduces all 34 existing primary and gray entries.
+- Added `primary-80-darker` (`#001133`) and `primary-90-darker` (`#000819`). Gray keeps its 80% and 90% darker steps (Michael, 2026-11-02: put them on every ramp for consistency).
+- Wrote the full-ramp rule and the formula into `AGENTS.md`; corrected its stale primary count. Version 0.2.0.
+
+### Current state
+- Branch `feature/brand-color-ramps`, not pushed, not merged. Palette is 40 colors.
+- The Diffyweb, Onfolio and Stratocus forks match the formula for their 80/90 darker entries; Caffaroma's are hand-picked.
+
+### What's next
+- Michael reviews and merges.
+- Font and spacing size changes are a separate open question.
+
+### Lessons
+- The formula only reproduces primary-70-darker with the float form `1 - n * 0.01`; `1 - n / 100` rounds tie values differently.
+
 ## 2026-04-13 — MC — Modularize functions.php, balance-text JS → CSS, Style Guide template
 
 ### What was done

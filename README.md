@@ -17,7 +17,7 @@ Upload the theme directory to `wp-content/themes/` and activate in **Appearance 
 
 **Parts:** `header`, `footer`
 
-**theme.json:** Grayscale + primary-blue color palette, 8 fluid font sizes over a system font stack, content width 1000px / wide width 1500px, root padding-aware alignments, block-level style overrides for headings, buttons, quotes, separators, site-title, and site-tagline. Custom gradients disabled; default palettes and gradients stripped.
+**theme.json:** 40-color palette (white, black, and gray and primary-blue ramps, each with 10% tints and shades from 90% lighter to 90% darker), 8 fluid font sizes over a system font stack, content width 1000px / wide width 1500px, root padding-aware alignments, block-level style overrides for headings, buttons, quotes, separators, site-title, and site-tagline. Custom gradients disabled; default palettes and gradients stripped.
 
 **Shortcodes** (one file per shortcode under `inc/shortcodes/`):
 - `[current_year]` — renders the current year (timezone-aware via `wp_date()`)
