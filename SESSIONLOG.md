@@ -11,12 +11,13 @@ Newest first. Update at the end of every session. See `AGENTS.md > Session Conti
 - Values: phone end (`min`) steps by 3^(1/6) ≈ 1.201 from 1rem to 3rem; desktop end (`max`) by 3.36^(1/6) ≈ 1.224 from 1.25rem to 4.2rem. Both anchors are the old `norm` and `xxxl` values, so h1 renders as `xxxl` did. `size` = `min`.
 - Mapped h1 to h6 and the body in `theme.json` `styles`; moved the site title to `md-plus` and every `norm` in templates and parts to `md`. No CSS added.
 - README Type scale section, AGENTS.md pointer, CHANGELOG 0.3.0, `style.css` 0.3.0.
+- Rendered the Style Guide, a post and the front page before and after at 390px (device emulation) and 1440px on a Local copy, then restored it. Every computed heading, body, site-title and footer size matched the table to 0.1px; body text and the post-grid titles didn't change.
 
 ### Current state
 - Branch `feature/type-scale`, branched from `main` while PR #1 (palette, 0.2.0) is open. After #1 merges, rebase: CHANGELOG order, the `style.css` version line, AGENTS.md line 66-67 and the README section placement need a hand merge.
 
 ### What's next
-- Render the Style Guide, a post and the front page before and after at 390px and 1440px.
+- The desktop end assumes WordPress's 1600px maximum viewport. Core takes that width from `layout.wideSize`, and today's `min()` value can't be parsed, so the default holds. If the gutter moves to root padding with a plain `wideSize` such as `1500px`, set `settings.typography.fluid.maxViewportWidth` to `1600px` in the same change, or every size stops growing at 1500px.
 - Heading margins are still `3em` top and `1em` bottom on `core/heading`. In `em` they grow with the larger heading sizes; whether they become 2em, or rem tokens, is a separate decision.
 
 ### Lessons
