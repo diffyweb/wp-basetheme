@@ -65,7 +65,7 @@ This is a **block theme** -- WordPress renders pages entirely from block markup 
 - **theme.json** is the central configuration file. It defines:
   - Color palette: 40 colors. `white`, `black`, a 19-step `gray` ramp and a 19-step `primary` ramp, each running `{slug}-90-lighter` through `{slug}-90-darker`
   - Typography: system font stack, 8 fluid font sizes (xs through xxxl)
-  - Layout: content width 1000px, wide width 1500px; the side gutter is root padding, and the README "Gutter" section has the rule and the cover and pagination exceptions
+  - Layout: content width 1000px, wide width 1500px; the side gutter is root padding, and the README "Gutter" section has the rule, how covers and nested Groups follow it, and the one cover exception
   - Block-level style overrides for headings, buttons, quotes, separators, site-title, site-tagline
   - Root padding-aware alignments enabled
   - Custom gradients disabled; default palettes/gradients stripped

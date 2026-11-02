@@ -41,15 +41,15 @@ To check that every ramp in `theme.json` still matches the formula in the script
 
 ## Gutter
 
-Text never touches the screen edge: there's a 1rem gutter on each side. It's WordPress root padding (`styles.spacing.padding` left and right, `var:preset|spacing|40`) with `useRootPaddingAwareAlignments` on, so full-width blocks still reach the edge. `contentSize` and `wideSize` are plain `1000px` and `1500px`. Change the gutter in that one place; never put it back into the widths.
+Text never touches the screen edge: there's a gutter on each side, set once as WordPress root padding (`styles.spacing.padding` left and right). Its value is core's spacing preset 40 (`var:preset|spacing|40`, which core's default spacing scale makes 1rem), so the gutter relies on that preset: if a site changes its spacing scale, the gutter changes with it. `useRootPaddingAwareAlignments` is on, so full-width blocks still reach the edge. `contentSize` and `wideSize` are plain `1000px` and `1500px`. Change the gutter in that one place; never put it back into the widths.
 
-Root padding applies to the outermost padded container only, so three things carry the gutter where it would otherwise be lost:
+Covers take the same value for their side padding (`styles.blocks.core/cover.spacing.padding` is `var(--wp--style--root--padding-left)` and `var(--wp--style--root--padding-right)`), so cover text sits one root padding inside the cover's edge and a full-width cover's text lines up with body text. A cover that sets its own side padding uses that instead. One exception: a constrained cover outside any padded container (at the top level of a template, in a template part, or in a flow-layout `main`, like `single.html`'s hero) also gets core's root padding on its inner container, so its text sits two root paddings in. <!-- voice-lint: ok (CSS variable names) -->
 
-- Covers: `styles.blocks.core/cover.spacing.padding` is `calc(1em + var(--wp--style--root--padding-left))` (and the right). That's core's 1em plus the gutter, so cover text lines up with the text column. <!-- voice-lint: ok (CSS variable names) -->
-- A cover that keeps core's `1em` sets its own side padding on the block. Two templates do: `single.html`'s hero sits outside any padded container, where core already pads its inner container, and the Style Guide's cover uses flow layout.
-- The pagination group in `front-page`, `home`, `index` and `archive` sets side padding to `var(--wp--style--root--padding-left)` (and the right), because it's a constrained group nested in a constrained `main`. <!-- voice-lint: ok (CSS variable names) -->
+Groups follow core: a Group inside another constrained container, such as a Group in post content or the pagination row in `front-page`, `home`, `index` and `archive`, lines up with the text around it.
 
 `settings.typography.fluid.maxViewportWidth` is `1600px`, because fluid type otherwise takes its widest viewport from `wideSize`. Keep it if you change `wideSize`, or your font sizes change too.
+
+A site built from an older copy of this theme adopts this in theme.json alone: the two layout sizes, the root padding, `maxViewportWidth` and the cover padding. No template changes are needed. Cover text moves `1em` closer to the cover's edge, and nested Groups line up with the text around them, so measure the site's pages before shipping.
 
 ## Architecture
 
