@@ -15,7 +15,7 @@ Newest first. Update at the end of every session. See `AGENTS.md > Session Conti
 - After review: `norm` stays removed, with no alias. A test on real content showed a block still asking for `norm` inherits its parent's size (inside a heading, 16px text became 41 to 53px). Added the README section "Adopting this scale on an existing site": move old `md` first, then `norm` to `md`, then check `sm` and `xs`, with the grep, `wp db search` and `wp search-replace` lines. The search was checked read-only on a real database and the replaces as dry runs.
 
 ### Current state
-- Branch `feature/type-scale`, branched from `main` while PR #1 (palette, 0.2.0) is open. After #1 merges, rebase: CHANGELOG order, the `style.css` version line, AGENTS.md line 66-67 and the README section placement need a hand merge.
+- Branch `feature/type-scale`, PR #2 open, not merged. PR #1 (palette, 0.2.0) merged to `main` first; `main` was merged into this branch (a merge commit, no rebase) and the conflicts in CHANGELOG, README, AGENTS.md, SESSIONLOG.md and `style.css` were resolved keeping both sides. Version stays 0.3.0.
 
 ### What's next
 - The desktop end assumes WordPress's 1600px maximum viewport. Core takes that width from `layout.wideSize`, and today's `min()` value can't be parsed, so the default holds. If the gutter moves to root padding with a plain `wideSize` such as `1500px`, set `settings.typography.fluid.maxViewportWidth` to `1600px` in the same change, or every size stops growing at 1500px.
@@ -24,6 +24,24 @@ Newest first. Update at the end of every session. See `AGENTS.md > Session Conti
 ### Lessons
 - With both `fluid.min` and `fluid.max` set, WordPress ignores `size` when rendering and draws a straight line from `min` at 320px to `max` at 1600px (`wp_get_typography_font_size_value`). The `min()` formula in `wideSize` doesn't parse as a length, so 1600px holds.
 - A plain `font-size--norm` search also matches core's old `font-size--normal`, and replacing it would write `--mdal`. End the pattern with `\b` and write a literal pipe as `[|]`, which every grep and PHP's regex read the same way.
+
+## 2026-11-02 — MC — Brand color ramps (0.2.0)
+
+### What was done
+- Worked out the palette formula: per-channel sRGB mix toward white or black, `round(c * (1 - n * 0.01))` for darker, `round(c + (255 - c) * n * 0.01)` for lighter, round-half-up. It reproduces all 34 existing primary and gray entries.
+- Added `primary-80-darker` (`#001133`) and `primary-90-darker` (`#000819`). Gray keeps its 80% and 90% darker steps (Michael, 2026-11-02: put them on every ramp for consistency).
+- Moved the formula out of `AGENTS.md` into `bin/palette-ramp.php` (generator plus `--check`) and a README Palette section; `AGENTS.md` points to both. Corrected its stale primary count. Version 0.2.0.
+
+### Current state
+- Branch `feature/brand-color-ramps-v2`, pushed, PR #1 open, not merged. Palette is 40 colors.
+- Existing site themes copied from this one are unchanged; their palettes live in their own repos.
+
+### What's next
+- Michael reviews and merges.
+- Font and spacing size changes are a separate open question.
+
+### Lessons
+- The formula only reproduces primary-70-darker with the float form `1 - n * 0.01`; `1 - n / 100` rounds tie values differently.
 
 ## 2026-04-13 — MC — Modularize functions.php, balance-text JS → CSS, Style Guide template
 

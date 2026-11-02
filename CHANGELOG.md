@@ -8,6 +8,12 @@
 - `norm` is removed outright, not aliased. A site adopting this release has to move its old `md` uses (now body size) first, then change every `norm` to `md`, then check `sm` and `xs`; a block still asking for `norm` inherits its parent's size, which inside a heading is the heading's. The README section "Adopting this scale on an existing site" has the order and the search and replace commands.
 - Theme version set to 0.3.0 in `style.css`.
 
+## 0.2.0 - 2026-11-02
+
+- **Brand colors carry the full tint and shade ramp** - add `primary-80-darker` (`#001133`) and `primary-90-darker` (`#000819`) so `primary` runs 90% lighter to 90% darker (19 entries), matching `gray`. Every ramp now has the same 19 steps, so a brand color added later gets the same ramp. Palette grows from 38 to 40 colors; nothing is removed. `AGENTS.md`'s primary count (18; the file had 17) was stale and is corrected.
+- Add `bin/palette-ramp.php`, which prints the 19-entry ramp for a new brand color and checks every ramp in `theme.json` against the formula (`--check`). It is plain PHP (7.4 or newer, no WordPress load), run as `php bin/palette-ramp.php`. The README has a short Palette section; `AGENTS.md` just points to it.
+- Theme version set to 0.2.0 in `style.css` (it was 0.1.0 and untouched by earlier entries).
+
 ## 2026-06-15
 
 - **Move text-balancing to the `wp-balance-text` companion plugin** — delete the theme's bespoke `assets/css/text-balance.css` + `inc/enqueues/enqueue-text-balance.php` (and the now-empty `assets/` and `inc/enqueues/` dirs). The feature now lives in [wp-balance-text](https://github.com/diffyweb/wp-balance-text): a *Balance* toggle in the editor's native Typography panel (one `editor.BlockEdit` filter, composes with any block style variation) plus a Settings page to pick block types balanced by default (H1–H6 on). One reusable home instead of a per-theme stylesheet copy. README/AGENTS updated to document it as the recommended companion plugin.

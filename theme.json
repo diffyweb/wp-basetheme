@@ -208,6 +208,16 @@
 					"color": "#00194c",
 					"name": "Primary 70% Darker",
 					"slug": "primary-70-darker"
+				},
+				{
+					"color": "#001133",
+					"name": "Primary 80% Darker",
+					"slug": "primary-80-darker"
+				},
+				{
+					"color": "#000819",
+					"name": "Primary 90% Darker",
+					"slug": "primary-90-darker"
 				}
 			]
 		},
