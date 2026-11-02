@@ -12,7 +12,7 @@ Newest first. Update at the end of every session. See `AGENTS.md > Session Conti
 - Moved the formula out of `AGENTS.md` into `bin/palette-ramp.py` (generator plus `--check`) and a README Palette section; `AGENTS.md` points to both. Corrected its stale primary count. Version 0.2.0.
 
 ### Current state
-- Branch `feature/brand-color-ramps-v2`, not pushed, not merged. Palette is 40 colors.
+- Branch `feature/brand-color-ramps-v2`, pushed, PR #1 open, not merged. Palette is 40 colors.
 - Existing site themes copied from this one are unchanged; their palettes live in their own repos.
 
 ### What's next

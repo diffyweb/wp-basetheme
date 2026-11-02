@@ -37,7 +37,7 @@ To add a brand color, run the script and paste its output into the `palette` arr
 python3 bin/palette-ramp.py accent "Accent" "#e0457b"
 ```
 
-To check that every ramp in `theme.json` still matches the formula: `python3 bin/palette-ramp.py --check theme.json`.
+To check that every ramp in `theme.json` still matches the formula in the script: `python3 bin/palette-ramp.py --check theme.json`.
 
 ## Architecture
 

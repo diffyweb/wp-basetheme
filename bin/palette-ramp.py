@@ -43,25 +43,49 @@ def ramp(slug, name, base_hex):
 
 
 def check(path):
-    palette = json.load(open(path))["settings"]["color"]["palette"]
+    try:
+        palette = json.load(open(path))["settings"]["color"]["palette"]
+    except (ValueError, KeyError, OSError) as err:
+        print(f"cannot read palette from {path}: {err.__class__.__name__}")
+        return 1
     by_slug = {p["slug"]: p for p in palette}
+    slugs = [p["slug"] for p in palette]
     pattern = re.compile(r"^(.+)-(\d+)-(lighter|darker)$")
     bases = sorted({m.group(1) for s in by_slug if (m := pattern.match(s))})
     problems, checked = [], 0
+    for slug in slugs:
+        if slug not in ("white", "black") and not pattern.match(slug) and slug not in bases:
+            problems.append(f"{slug}: color has no ramp")
+    for needed in ("white", "black", "gray"):
+        if needed not in by_slug:
+            problems.append(f"{needed}: missing, it stays on every site")
+    if "gray" not in bases:
+        problems.append("gray: missing ramp, it stays on every site")
     for base in bases:
         if base not in by_slug:
             problems.append(f"{base}: ramp has no base color entry")
             continue
-        order = [s for s, _, _ in ramp(base, "", by_slug[base]["color"])]
-        present = [p["slug"] for p in palette if p["slug"] in order]
-        if present != order:
-            problems.append(f"{base}: ramp is incomplete or out of order")
-        for slug, name, color in ramp(base, by_slug[base]["name"], by_slug[base]["color"]):
+        color = by_slug[base]["color"]
+        if not re.fullmatch(r"#[0-9a-fA-F]{6}", color):
+            problems.append(f"{base}: base color is not #rrggbb")
+            continue
+        expected = ramp(base, by_slug[base]["name"], color)
+        order = [e[0] for e in expected]
+        members = [k for k, s in enumerate(slugs) if s in order or (s.startswith(base + "-") and pattern.match(s) and pattern.match(s).group(1) == base)]
+        ours = [slugs[k] for k in members]
+        if ours != order:
+            problems.append(f"{base}: ramp is incomplete, off-grid or out of order")
+        if members and members[-1] - members[0] + 1 != len(members):
+            problems.append(f"{base}: ramp entries are not contiguous in the palette")
+        for slug, name, shade_hex in expected:
             if slug == base or slug not in by_slug:
                 continue
             checked += 1
-            if by_slug[slug]["color"].lower() != color:
-                problems.append(f"{slug}: file {by_slug[slug]['color']}, formula {color}")
+            entry = by_slug[slug]
+            if entry["color"].lower() != shade_hex:
+                problems.append(f"{slug}: file {entry['color']}, formula {shade_hex}")
+            if entry["name"] != name:
+                problems.append(f"{slug}: name is {entry['name']!r}, expected {name!r}")
     print(f"ramps: {', '.join(bases)}; {checked} entries checked, {len(problems)} problems")
     for line in problems:
         print("  " + line)
@@ -71,9 +95,9 @@ def check(path):
 def main(argv):
     if len(argv) == 3 and argv[1] == "--check":
         return check(argv[2])
-    if len(argv) == 4 and re.fullmatch(r"#[0-9a-fA-F]{6}", argv[3]):
+    if len(argv) == 4 and re.fullmatch(r"#[0-9a-fA-F]{6}", argv[3]) and re.fullmatch(r"[a-z][a-z0-9]*(-[a-z0-9]+)*", argv[1]):
         for slug, name, color in ramp(argv[1], argv[2], argv[3]):
-            print('\t\t\t\t{\n\t\t\t\t\t"color": "%s",\n\t\t\t\t\t"name": "%s",\n\t\t\t\t\t"slug": "%s"\n\t\t\t\t},' % (color, name, slug))
+            print("\t\t\t\t{\n\t\t\t\t\t\"color\": %s,\n\t\t\t\t\t\"name\": %s,\n\t\t\t\t\t\"slug\": %s\n\t\t\t\t}," % (json.dumps(color), json.dumps(name), json.dumps(slug)))
         return 0
     print(__doc__)
     return 2
