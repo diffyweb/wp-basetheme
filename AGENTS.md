@@ -63,7 +63,7 @@ This is a **block theme** -- WordPress renders pages entirely from block markup 
 - **Templates** (`templates/*.html`) define full page layouts using WordPress block comments (`<!-- wp:group -->`, `<!-- wp:query -->`, etc.). Each template includes the header and footer parts via `<!-- wp:template-part -->`.
 - **Template parts** (`parts/*.html`) are reusable header/footer fragments.
 - **theme.json** is the central configuration file. It defines:
-  - Color palette: 21 grayscale shades (white through black) + 18 primary-blue shades
+  - Color palette: 40 colors. `white`, `black`, a 19-step `gray` ramp and a 19-step `primary` ramp, each running `{slug}-90-lighter` through `{slug}-90-darker`
   - Typography: system font stack, 8 fluid font sizes (xs through xxxl)
   - Layout: content width 1000px, wide width 1500px (both with responsive `min()`)
   - Block-level style overrides for headings, buttons, quotes, separators, site-title, site-tagline
@@ -94,7 +94,7 @@ This is a **block theme** -- WordPress renders pages entirely from block markup 
 - **Narrow CSS utilities may be enqueued.** Small, single-purpose stylesheets that can't be expressed as design tokens live under `assets/css/<feature>.css`, enqueued via a matching `inc/enqueues/enqueue-<feature>.php`. None ship by default. Keep each focused on one concern — no catch-all `main.css`. If a focused companion plugin already solves it (e.g. [wp-balance-text](https://github.com/diffyweb/wp-balance-text) for `text-wrap: balance`), prefer the plugin over a per-theme copy. If something *can* be a theme.json design token, it still belongs there.
 - **Block markup only.** Templates are pure WordPress block comments in HTML. No PHP template tags, no `the_content()` calls, no template hierarchy hacks.
 - **Fluid typography.** Every font size has `min`/`max` fluid values. Do not use fixed sizes.
-- **Color palette naming.** Grayscale uses `gray-{N}-lighter` / `gray-{N}-darker` pattern. Primary uses `primary-{N}-lighter` / `primary-{N}-darker`. Base colors are `white`, `black`, `gray`, `primary`.
+- Palette: ramps, the rule for new brand colors and the generator are in the README "Palette" section; the formula lives only in `bin/palette-ramp.php`. After any palette edit run `php bin/palette-ramp.php --check theme.json`.
 - **Shortcodes over hardcoded values.** Use `[current_year]` in footer copyright rather than a hardcoded year.
 - **Prefer native platform features over JS libraries.** Before vendoring or enqueueing a script, check whether a native CSS / HTML feature covers the use case. If a third-party JS dependency is still required, vendor it locally under `assets/js/vendor/` with the upstream commit hash in the enqueue file's docblock — no CDN dependencies.
 - **One feature per inc/ file.** Shortcodes, enqueues, and block modifications each live in their own file under `inc/<category>/`. Filenames carry their category as a prefix (`shortcode-*.php`, `enqueue-*.php`, `block-mod-*.php`).

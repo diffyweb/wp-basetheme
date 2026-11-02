@@ -4,6 +4,24 @@ Newest first. Update at the end of every session. See `AGENTS.md > Session Conti
 
 ---
 
+## 2026-11-02 — MC — Brand color ramps (0.2.0)
+
+### What was done
+- Worked out the palette formula: per-channel sRGB mix toward white or black, `round(c * (1 - n * 0.01))` for darker, `round(c + (255 - c) * n * 0.01)` for lighter, round-half-up. It reproduces all 34 existing primary and gray entries.
+- Added `primary-80-darker` (`#001133`) and `primary-90-darker` (`#000819`). Gray keeps its 80% and 90% darker steps (Michael, 2026-11-02: put them on every ramp for consistency).
+- Moved the formula out of `AGENTS.md` into `bin/palette-ramp.php` (generator plus `--check`) and a README Palette section; `AGENTS.md` points to both. Corrected its stale primary count. Version 0.2.0.
+
+### Current state
+- Branch `feature/brand-color-ramps-v2`, pushed, PR #1 open, not merged. Palette is 40 colors.
+- Existing site themes copied from this one are unchanged; their palettes live in their own repos.
+
+### What's next
+- Michael reviews and merges.
+- Font and spacing size changes are a separate open question.
+
+### Lessons
+- The formula only reproduces primary-70-darker with the float form `1 - n * 0.01`; `1 - n / 100` rounds tie values differently.
+
 ## 2026-04-13 — MC — Modularize functions.php, balance-text JS → CSS, Style Guide template
 
 ### What was done

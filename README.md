@@ -17,7 +17,7 @@ Upload the theme directory to `wp-content/themes/` and activate in **Appearance 
 
 **Parts:** `header`, `footer`
 
-**theme.json:** Grayscale + primary-blue color palette, 8 fluid font sizes over a system font stack, content width 1000px / wide width 1500px, root padding-aware alignments, block-level style overrides for headings, buttons, quotes, separators, site-title, and site-tagline. Custom gradients disabled; default palettes and gradients stripped.
+**theme.json:** 40-color palette (white, black, and gray and primary-blue ramps, each with 10% tints and shades from 90% lighter to 90% darker), 8 fluid font sizes over a system font stack, content width 1000px / wide width 1500px, root padding-aware alignments, block-level style overrides for headings, buttons, quotes, separators, site-title, and site-tagline. Custom gradients disabled; default palettes and gradients stripped.
 
 **Shortcodes** (one file per shortcode under `inc/shortcodes/`):
 - `[current_year]` — renders the current year (timezone-aware via `wp_date()`)
@@ -26,6 +26,18 @@ Upload the theme directory to `wp-content/themes/` and activate in **Appearance 
 **Text balancing (companion plugin):** Heading/short-line balancing (`text-wrap: balance`) is provided by the **[wp-balance-text](https://github.com/diffyweb/wp-balance-text)** plugin, not the theme. It adds a *Balance* toggle to the editor's native Typography panel (per-block, composes with any block style variation) plus a **Settings → Balance Text** page to pick block types balanced by default (H1–H6 on out of the box). Install + activate it alongside this theme; the theme no longer ships its own text-balance stylesheet — one reusable home for the feature instead of a per-theme copy.
 
 **Block modifications:** `core/template-part` and `core/post-content` have spacing supports (margin + padding) enabled so they can be tuned from the Site Editor like any other block.
+
+## Palette
+
+`white`, `black` and the `gray` ramp stay on every site. Every brand color gets its full ramp, from 90% lighter to 90% darker in 10% steps (19 entries, slugs like `primary-30-lighter` and `primary-70-darker`), so any brand color can be tinted or shaded the same way.
+
+To add a brand color, run the script and paste its output into the `palette` array in `theme.json`, after `black`:
+
+```
+php bin/palette-ramp.php accent "Accent" "#e0457b"
+```
+
+To check that every ramp in `theme.json` still matches the formula in the script: `php bin/palette-ramp.php --check theme.json`.
 
 ## Architecture
 
