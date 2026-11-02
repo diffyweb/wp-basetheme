@@ -18,6 +18,8 @@
  * tested on PHP 8.5.12.
  */
 
+'cli' === PHP_SAPI || exit; // The theme ships bin/, so a web request must do nothing.
+
 const STEPS = array( 10, 20, 30, 40, 50, 60, 70, 80, 90 );
 const HEX   = '/^#[0-9a-fA-F]{6}\z/';
 const SLUG  = '/^[a-z][a-z0-9]*(-[a-z0-9]+)*\z/';
@@ -51,6 +53,9 @@ function ramp( string $slug, string $name, string $base_hex ): array {
 }
 
 function read_palette( string $path ): array {
+	if ( false !== strpos( $path, '://' ) ) {
+		throw new RuntimeException( 'OSError: URLs are not read, give a file path' );
+	}
 	$raw = @file_get_contents( $path );
 	if ( false === $raw ) {
 		throw new RuntimeException( 'OSError: cannot open file' );
@@ -61,6 +66,10 @@ function read_palette( string $path ): array {
 	}
 	if ( ! isset( $data['settings']['color']['palette'] ) || ! is_array( $data['settings']['color']['palette'] ) ) {
 		throw new RuntimeException( 'KeyError: settings.color.palette is missing or not a list' );
+	}
+	$strict = json_decode( $raw ); // Objects stay objects here, so a JSON object palette is caught.
+	if ( ! isset( $strict->settings->color->palette ) || ! is_array( $strict->settings->color->palette ) ) {
+		throw new RuntimeException( 'TypeError: palette must be a JSON list' );
 	}
 	$palette = $data['settings']['color']['palette'];
 	foreach ( $palette as $entry ) {
@@ -172,7 +181,7 @@ function main( array $argv ): int {
 	if ( 3 === count( $argv ) && '--check' === $argv[1] ) {
 		return check( $argv[2] );
 	}
-	if ( 4 === count( $argv ) && preg_match( HEX, $argv[3] ) && preg_match( SLUG, $argv[1] ) ) {
+	if ( 4 === count( $argv ) && preg_match( HEX, $argv[3] ) && preg_match( SLUG, $argv[1] ) && preg_match( '//u', $argv[2] ) ) {
 		$flags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
 		foreach ( ramp( $argv[1], $argv[2], $argv[3] ) as $row ) {
 			list( $slug, $name, $color ) = $row;
