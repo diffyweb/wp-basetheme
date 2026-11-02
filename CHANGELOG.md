@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0 - 2026-11-02
+
+- The side gutter is now WordPress root padding: `styles.spacing.padding` left and right are `var:preset|spacing|40` (1rem in core's default spacing scale), and `contentSize` and `wideSize` are plain `1000px` and `1500px`. Until now both widths were `min(calc(100% - var(--wp--preset--spacing--xl,2rem)), ...)`. That formula made the gutter (`spacing--xl` was never defined, so it was always the 2rem fallback) and left root padding at zero, so `useRootPaddingAwareAlignments` did nothing. Body text, the header and footer, and wide and full-width blocks sit where they did at every width from 360 to 1440px. <!-- voice-lint: ok (CSS variable names) -->
+- `settings.typography.fluid.maxViewportWidth` is `1600px`. Core's fluid type takes its widest viewport from `layout.wideSize` when it can read it. It couldn't read the `min()` value, so it used its 1600px default; setting 1600px keeps every font size as it was.
+- Covers take their side padding from the root padding (`styles.blocks.core/cover.spacing.padding` left and right are `var(--wp--style--root--padding-left)` and `var(--wp--style--root--padding-right)`) instead of the fixed `1em` core gives every cover. One setting now drives the page gutter and the cover inset: cover text sits one root padding inside the cover's edge, so a full-width cover's text lines up with body text. Under the old formula it sat `1em` plus a gutter in (at 390px wide, a full-width cover's text moves from 32.22px to 16px from the screen edge). A cover that sets its own side padding keeps it. <!-- voice-lint: ok (CSS variable names) -->
+- A constrained cover that isn't inside any padded container (at the top level of a template, in a template part, or in a flow-layout `main`) also gets core's root padding on its inner container, which theme.json can't reach. Such a cover sets its own side padding to `0`, so its text also sits one root padding in. `single.html`'s hero now does this, so its title lines up with body text (at 390px wide it moves from 32.22px to 16px from the screen edge).
+- Nested Groups follow core. A Group inside another constrained container (a Group in post content, the pagination row in `front-page`, `home`, `index` and `archive`) now lines up with the text around it; the old formula stepped each level in by another gutter. The pagination row now lines up with the post grid.
+- Theme version set to 0.3.0 in `style.css`.
+
 ## 0.2.0 - 2026-11-02
 
 - **Brand colors carry the full tint and shade ramp** - add `primary-80-darker` (`#001133`) and `primary-90-darker` (`#000819`) so `primary` runs 90% lighter to 90% darker (19 entries), matching `gray`. Every ramp now has the same 19 steps, so a brand color added later gets the same ramp. Palette grows from 38 to 40 colors; nothing is removed. `AGENTS.md`'s primary count (18; the file had 17) was stale and is corrected.
