@@ -12,6 +12,7 @@ Newest first. Update at the end of every session. See `AGENTS.md > Session Conti
 - Mapped h1 to h6 and the body in `theme.json` `styles`; moved the site title to `md-plus` and every `norm` in templates and parts to `md`. No CSS added.
 - README Type scale section, AGENTS.md pointer, CHANGELOG 0.3.0, `style.css` 0.3.0.
 - Rendered the Style Guide, a post and the front page before and after at 390px (device emulation) and 1440px on a Local copy, then restored it. Every computed heading, body, site-title and footer size matched the table to 0.1px; body text and the post-grid titles didn't change.
+- After review: `norm` stays removed, with no alias. A test on real content showed a block still asking for `norm` inherits its parent's size (inside a heading, 16px text became 41 to 53px). Added the README section "Adopting this scale on an existing site": move old `md` first, then `norm` to `md`, then check `sm` and `xs`, with the grep, `wp db search` and `wp search-replace` lines. The search was checked read-only on a real database and the replaces as dry runs.
 
 ### Current state
 - Branch `feature/type-scale`, branched from `main` while PR #1 (palette, 0.2.0) is open. After #1 merges, rebase: CHANGELOG order, the `style.css` version line, AGENTS.md line 66-67 and the README section placement need a hand merge.
@@ -22,6 +23,7 @@ Newest first. Update at the end of every session. See `AGENTS.md > Session Conti
 
 ### Lessons
 - With both `fluid.min` and `fluid.max` set, WordPress ignores `size` when rendering and draws a straight line from `min` at 320px to `max` at 1600px (`wp_get_typography_font_size_value`). The `min()` formula in `wideSize` doesn't parse as a length, so 1600px holds.
+- A plain `font-size--norm` search also matches core's old `font-size--normal`, and replacing it would write `--mdal`. End the pattern with `\b` and write a literal pipe as `[|]`, which every grep and PHP's regex read the same way.
 
 ## 2026-04-13 — MC — Modularize functions.php, balance-text JS → CSS, Style Guide template
 

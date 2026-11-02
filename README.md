@@ -49,6 +49,37 @@ Each end of the range is a steady scale. On phones every step is 1.2 times the o
 
 To retune a site, choose its body and h1 sizes for each end, then size every step as body × (h1 ÷ body)^(n ÷ 6), where n is 1 for h6 up to 6 for h1, -1 for `sm` and -2 for `xs`, rounded to two decimals. Put the phone value in `size` as well as `min`: WordPress only uses `size` when fluid type is off, and the editor shows it.
 
+## Adopting this scale on an existing site
+
+A site made from an older copy of this theme has the old slugs in its theme files and its stored content, and three of them now behave differently. Copy the new `fontSizes` and the h1 to h6 styles into the site's `theme.json`, then work through the slugs in this order:
+
+1. Move the old `md` uses first. `md` was 1.5rem and is now the body size, so anything set in `md` shrinks to body text. Most of these belong in `md-plus`, the nearest new step; look at each one and decide. Do this before step 2, because once `norm` becomes `md` the two can't be told apart. Run the `md` search before adding any `md-plus`, since its variable form also matches `md-plus`.
+2. Change every `norm` to `md`. `norm` no longer exists, and a block that still asks for it gets no size of its own: it inherits its parent's. Inside a heading that's the heading's size, so a line of 16px text can come out at 40px or more.
+3. Check what uses `sm` and `xs`. They keep their names but come out 6–13% larger, which can matter in tight places such as buttons, badges and footer rows. `lg`, `xl` and `xxl` move by up to 14% and keep their roles.
+
+A slug can appear in four forms: the block attribute `"fontSize":"norm"`, the class `has-norm-font-size`, the variable `--wp--preset--font-size--norm` and the style reference `var:preset|font-size|norm`. These commands list all four, shown for `norm` (swap in `md`, `sm` or `xs`). `[|]` is a literal pipe, and `\b` keeps core's old `normal` size out of the results.
+
+In the theme folder (templates, parts, patterns, styles and `theme.json`):
+
+```
+grep -rnE 'fontSize":"norm"|has-norm-font-size|font-size(--|[|])norm\b' .
+```
+
+In the database (post content, Site Editor changes to templates, parts and global styles, and block widgets):
+
+```
+wp db search 'fontSize":"norm"|has-norm-font-size|font-size(--|[|])norm\b' --regex
+```
+
+Edit the theme files by hand. To change `norm` to `md` in the database, back up first (`wp db export`, saved outside the web root), dry-run each line and compare its count with the search, then run the lines again without `--dry-run` and flush the cache:
+
+```
+wp search-replace '"fontSize":"norm"' '"fontSize":"md"' --dry-run
+wp search-replace 'has-norm-font-size' 'has-md-font-size' --dry-run
+wp search-replace 'font-size(--|[|])norm\b' 'font-size${1}md' --regex --dry-run
+wp cache flush
+```
+
 ## Architecture
 
 `functions.php` is a thin bootstrap that auto-loads every PHP file under `inc/<category>/`. Features live in focused, single-responsibility files grouped by concern:
