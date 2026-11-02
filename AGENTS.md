@@ -64,7 +64,7 @@ This is a **block theme** -- WordPress renders pages entirely from block markup 
 - **Template parts** (`parts/*.html`) are reusable header/footer fragments.
 - **theme.json** is the central configuration file. It defines:
   - Color palette: 21 grayscale shades (white through black) + 18 primary-blue shades
-  - Typography: system font stack, 8 fluid font sizes (xs through xxxl)
+  - Typography: system font stack and a 9-step fluid type scale mapped to h1 to h6 and body text; sizes, roles and the retuning rule are in the README "Type scale" section
   - Layout: content width 1000px, wide width 1500px (both with responsive `min()`)
   - Block-level style overrides for headings, buttons, quotes, separators, site-title, site-tagline
   - Root padding-aware alignments enabled

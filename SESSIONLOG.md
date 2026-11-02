@@ -4,6 +4,24 @@ Newest first. Update at the end of every session. See `AGENTS.md > Session Conti
 
 ---
 
+## 2026-11-02 — MC — Type scale (0.3.0) <!-- voice-lint: ok (heading format set in AGENTS.md) -->
+
+### What was done
+- Replaced the 8 font sizes with a 9-step scale: h1 to h6, body, small, extra-small. `norm` folded into `md` (the body size); new `md-plus` (h6) and `lg-minus` (h5); `xs`, `sm`, `lg`, `xl`, `xxl`, `xxxl` kept.
+- Values: phone end (`min`) steps by 3^(1/6) ≈ 1.201 from 1rem to 3rem; desktop end (`max`) by 3.36^(1/6) ≈ 1.224 from 1.25rem to 4.2rem. Both anchors are the old `norm` and `xxxl` values, so h1 renders as `xxxl` did. `size` = `min`.
+- Mapped h1 to h6 and the body in `theme.json` `styles`; moved the site title to `md-plus` and every `norm` in templates and parts to `md`. No CSS added.
+- README Type scale section, AGENTS.md pointer, CHANGELOG 0.3.0, `style.css` 0.3.0.
+
+### Current state
+- Branch `feature/type-scale`, branched from `main` while PR #1 (palette, 0.2.0) is open. After #1 merges, rebase: CHANGELOG order, the `style.css` version line, AGENTS.md line 66-67 and the README section placement need a hand merge.
+
+### What's next
+- Render the Style Guide, a post and the front page before and after at 390px and 1440px.
+- Heading margins are still `3em` top and `1em` bottom on `core/heading`. In `em` they grow with the larger heading sizes; whether they become 2em, or rem tokens, is a separate decision.
+
+### Lessons
+- With both `fluid.min` and `fluid.max` set, WordPress ignores `size` when rendering and draws a straight line from `min` at 320px to `max` at 1600px (`wp_get_typography_font_size_value`). The `min()` formula in `wideSize` doesn't parse as a length, so 1600px holds.
+
 ## 2026-04-13 — MC — Modularize functions.php, balance-text JS → CSS, Style Guide template
 
 ### What was done
