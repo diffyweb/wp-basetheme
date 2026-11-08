@@ -498,11 +498,13 @@
 	"templateParts": [
 		{
 			"area": "header",
-			"name": "Header"
+			"name": "header",
+			"title": "Header"
 		},
 		{
 			"area": "footer",
-			"name": "Footer"
+			"name": "footer",
+			"title": "Footer"
 		}
 	],
 	"version": 3,
