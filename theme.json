@@ -252,70 +252,79 @@
 						"min": "3.0rem"
 					},
 					"name": "3X Large",
-					"size": "3.6rem",
+					"size": "3.0rem",
 					"slug": "xxxl"
 				},
 				{
 					"fluid": {
-						"max": "3.4rem",
-						"min": "2.6rem"
+						"max": "3.43rem",
+						"min": "2.5rem"
 					},
 					"name": "2X Large",
-					"size": "3.0rem",
+					"size": "2.5rem",
 					"slug": "xxl"
 				},
 				{
 					"fluid": {
-						"max": "3.0rem",
-						"min": "2.2rem"
+						"max": "2.8rem",
+						"min": "2.08rem"
 					},
 					"name": "X Large",
-					"size": "2.6rem",
+					"size": "2.08rem",
 					"slug": "xl"
 				},
 				{
 					"fluid": {
-						"max": "2.4rem",
-						"min": "2.0rem"
+						"max": "2.29rem",
+						"min": "1.73rem"
 					},
 					"name": "Large",
-					"size": "2.2rem",
+					"size": "1.73rem",
 					"slug": "lg"
 				},
 				{
 					"fluid": {
-						"max": "1.7rem",
-						"min": "1.3rem"
+						"max": "1.87rem",
+						"min": "1.44rem"
 					},
-					"name": "Medium",
-					"size": "1.5rem",
-					"slug": "md"
+					"name": "Large Minus",
+					"size": "1.44rem",
+					"slug": "lg-minus"
+				},
+				{
+					"fluid": {
+						"max": "1.53rem",
+						"min": "1.2rem"
+					},
+					"name": "Medium Plus",
+					"size": "1.2rem",
+					"slug": "md-plus"
 				},
 				{
 					"fluid": {
 						"max": "1.25rem",
-						"min": "1.0em"
+						"min": "1.0rem"
 					},
-					"name": "Normal",
-					"size": "1.0em",
-					"slug": "norm"
+					"name": "Medium",
+					"size": "1.0rem",
+					"slug": "md"
 				},
 				{
 					"fluid": {
-						"max": "0.9rem",
-						"min": "0.75rem"
+						"max": "1.02rem",
+						"min": "0.83rem"
 					},
 					"name": "Small",
-					"size": "0.8rem",
+					"size": "0.83rem",
 					"slug": "sm"
 				},
 				{
 					"fluid": {
-						"max": "0.75rem",
-						"min": "0.65rem"
+						"max": "0.83rem",
+						"min": "0.69rem"
 					},
 					"name": "X Small",
-					"size": "0.7rem",
+					"size": "0.69rem",
 					"slug": "xs"
 				}
 			]
@@ -400,12 +409,42 @@
 			},
 			"core/site-title": {
 				"typography": {
-					"fontSize": "var(--wp--preset--font-size--md)",
+					"fontSize": "var(--wp--preset--font-size--md-plus)",
 					"fontWeight": "700"
 				}
 			}
 		},
 		"elements": {
+			"h1": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--xxxl)"
+				}
+			},
+			"h2": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--xxl)"
+				}
+			},
+			"h3": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--xl)"
+				}
+			},
+			"h4": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--lg)"
+				}
+			},
+			"h5": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--lg-minus)"
+				}
+			},
+			"h6": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--md-plus)"
+				}
+			},
 			"heading": {
 				"typography": {
 					"fontStyle": "normal",
@@ -427,7 +466,7 @@
 		},
 		"typography": {
 			"fontFamily": "var(--wp--preset--font-family--system-font)",
-			"fontSize": "var(--wp--preset--font-size--norm)",
+			"fontSize": "var(--wp--preset--font-size--md)",
 			"lineHeight": "1.4"
 		}
 	},
