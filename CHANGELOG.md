@@ -2,7 +2,7 @@
 
 ## 0.3.1 - 2026-11-08
 
-- Fix the `templateParts` entries in `theme.json`: `name` is now `header` and `footer`, matching `parts/header.html` and `parts/footer.html`, with the display labels in `title`. WordPress matches a declared area to a part by file name, so the old `Header` and `Footer` names left both parts under Uncategorized in the Site Editor. A site that already saved these parts in the database keeps the old area until each part's Area is reassigned in the Site Editor.
+- Fix the `templateParts` entries in `theme.json`: `name` is now `header` and `footer`, matching `parts/header.html` and `parts/footer.html`, with the display labels in `title`.
 - Theme version set to 0.3.1 in `style.css`.
 
 ## 0.3.0 - 2026-11-02
