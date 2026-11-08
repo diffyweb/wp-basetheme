@@ -4,7 +4,27 @@ Newest first. Update at the end of every session. See `AGENTS.md > Session Conti
 
 ---
 
-## 2026-11-02 — MC — Type scale (0.3.0) <!-- voice-lint: ok (heading format set in AGENTS.md) -->
+## 2026-11-02 - MC - Root padding gutter (0.3.0)
+
+### What was done
+- PR #1 (brand color ramps, 0.2.0) merged at 16:14 UTC.
+- Moved the side gutter from the `min()` width formula to root padding (`var:preset|spacing|40`) with plain 1000px/1500px widths, and set `fluid.maxViewportWidth` to 1600px so font sizes stay put.
+- Covers take their side padding from the root padding instead of core's fixed `1em` (Michael, 2026-11-02: covers should follow the same layout rule, based on the root padding variable). Nested Groups and the pagination row follow core and line up with the text around them (Michael: the nested Group layout "was always a frustration").
+- Measured on basetheme.local at 7 widths, front end and editor: body text, header, footer, wide and full-width blocks and font sizes unchanged; cover text and nested Groups move as described in the CHANGELOG.
+- A client site was measured with the same theme.json change (8 pages, 7 widths): only its front-page hero text and a nested-Group footer band move, both by these rules (details in PR #3).
+
+### Current state
+- Branch `feature/root-padding-gutter`, PR #3 open. Version 0.3.0, the same number PR #2 (type scale) uses; whichever merges second goes to 0.4.0 by hand and resolves the CHANGELOG, README and AGENTS conflicts.
+- Every cover follows one rule: text one root padding inside its edge. A constrained cover outside any padded container sets its own side padding to 0 to get there (`single.html`'s hero does), because core also pads its inner container.
+
+### What's next
+- Michael reviews #3.
+
+### Lessons
+- Core puts root padding on the outermost padded container only. Anything that leaned on the old formula's inset inside every constrained container (covers, nested Groups) either follows core or needs its own setting.
+- theme.json can't reach a cover's inner container, so a cover at the top level needs its own side padding set to 0 in the template to match covers in content.
+
+## 2026-11-02 — MC — Type scale (0.3.0)
 
 ### What was done
 - Replaced the 8 font sizes with a 9-step scale: h1 to h6, body, small, extra-small. `norm` folded into `md` (the body size); new `md-plus` (h6) and `lg-minus` (h5); `xs`, `sm`, `lg`, `xl`, `xxl`, `xxxl` kept.

@@ -39,6 +39,20 @@ php bin/palette-ramp.php accent "Accent" "#e0457b"
 
 To check that every ramp in `theme.json` still matches the formula in the script: `php bin/palette-ramp.php --check theme.json`.
 
+## Gutter
+
+Text never touches the screen edge: there's a gutter on each side, set once as WordPress root padding (`styles.spacing.padding` left and right). Its value is core's spacing preset 40 (`var:preset|spacing|40`, which core's default spacing scale makes 1rem), so the gutter relies on that preset: if a site changes its spacing scale, the gutter changes with it. `useRootPaddingAwareAlignments` is on, so full-width blocks still reach the edge. `contentSize` and `wideSize` are plain `1000px` and `1500px`. Change the gutter in that one place; never put it back into the widths.
+
+Covers take the same value for their side padding (`styles.blocks.core/cover.spacing.padding` is `var(--wp--style--root--padding-left)` and `var(--wp--style--root--padding-right)`), so cover text sits one root padding inside the cover's edge and a full-width cover's text lines up with body text. A cover that sets its own side padding uses that instead. <!-- voice-lint: ok (CSS variable names) -->
+
+One placement needs a template setting: a constrained cover at the top level of a template, in a template part, or in a flow-layout `main` isn't inside any padded container, so core also pads its inner container with the root padding, and theme.json can't reach that. Set that cover's own side padding to `0` (left and right) so its text sits one root padding in like every other cover. `single.html`'s hero does this. This is for constrained covers only: a flow-layout cover gets no padding on its inner container, so with side padding `0` its text would sit on the screen edge.
+
+Groups follow core: a Group inside another constrained container, such as a Group in post content or the pagination row in `front-page`, `home`, `index` and `archive`, lines up with the text around it.
+
+`settings.typography.fluid.maxViewportWidth` is `1600px`, because fluid type otherwise takes its widest viewport from `wideSize`. Keep it if you change `wideSize`, or your font sizes change too.
+
+A site built from an older copy of this theme adopts this in theme.json (the two layout sizes, the root padding, `maxViewportWidth` and the cover padding), plus side padding `0` on any constrained cover its templates place at the top level, in a part or in a flow-layout `main`. Cover text moves too: a constrained cover's text goes from `1em` plus one root padding to one root padding inside its edge, a flow-layout cover's from `1em` to one root padding, a constrained cover with its own side padding goes from that padding plus one root padding to that padding (a flow-layout one doesn't move), and cover text held to the content width (on wide screens) doesn't move. Nested Groups line up with the text around them. Measure the site's pages before shipping.
+
 ## Type scale
 
 Nine font sizes: one for each heading level, one for body text and two for smaller text. Each grows from its phone size at a 320px screen to its desktop size at 1600px, in a straight line between the two.
