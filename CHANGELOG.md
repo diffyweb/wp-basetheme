@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1 - 2026-11-08
+
+- Fix the `templateParts` entries in `theme.json`: `name` is now `header` and `footer`, matching `parts/header.html` and `parts/footer.html`, with the display labels in `title`. WordPress matches a declared area to a part by file name, so the old `Header` and `Footer` names left both parts under Uncategorized in the Site Editor. A site that already saved these parts in the database keeps the old area until each part's Area is reassigned in the Site Editor.
+- Theme version set to 0.3.1 in `style.css`.
+
 ## 0.3.0 - 2026-11-02
 
 - The side gutter is now WordPress root padding: `styles.spacing.padding` left and right are `var:preset|spacing|40` (1rem in core's default spacing scale), and `contentSize` and `wideSize` are plain `1000px` and `1500px`. Until now both widths were `min(calc(100% - var(--wp--preset--spacing--xl,2rem)), ...)`. That formula made the gutter (`spacing--xl` was never defined, so it was always the 2rem fallback) and left root padding at zero, so `useRootPaddingAwareAlignments` did nothing. Body text, the header and footer, and wide and full-width blocks sit where they did at every width from 360 to 1440px. <!-- voice-lint: ok (CSS variable names) -->
