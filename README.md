@@ -39,6 +39,14 @@ php bin/palette-ramp.php accent "Accent" "#e0457b"
 
 To check that every ramp in `theme.json` still matches the formula in the script: `php bin/palette-ramp.php --check theme.json`.
 
+## Card link
+
+The "Card link" and "Card link, filled" block styles of Group (`styles/blocks/card-link.json`, `card-link-filled.json`) make a whole card one link; the filled one rests on a tinted fill, the other on white and fills on hover. Build the card as a Group, pick the style in the block's Styles panel (class `is-style-card-link` or `is-style-card-link-filled`), and put a heading inside whose text is a link. That link's `::after` covers the card, so a click anywhere on it follows the link, and the card has one link, one tab stop (when the card holds no other link) and no script. Keyboard focus draws a ring around the card, and hover turns the border `primary` (and fills the white style `primary-90-lighter`).
+
+- Card markup: Group (`is-style-card-link`) holding a heading with the link, then any paragraphs, lists or an icon. Columns and Grid layouts place the cards; the style sits on each card Group, not on the Columns block.
+- One link per card: other links inside the card sit under the stretched link and cannot be clicked or focused by pointer, so a second link is left off. Text under the stretched link is not selectable by dragging.
+- The rules live in the style's `css` (a nested rule set on the card, using theme presets), because theme.json has no setting for a stretched link, hover or `:has()` focus ring; border, radius, color, padding and gap are theme.json style properties. The styles use the palette's `white`, `black`, `primary`, `primary-80-lighter`, `primary-90-lighter` and `primary-20-darker`, and core's spacing presets 30 and 50: a site that renames or drops those edits the two files.
+
 ## Gutter
 
 Text never touches the screen edge: there's a gutter on each side, set once as WordPress root padding (`styles.spacing.padding` left and right). Its value is core's spacing preset 40 (`var:preset|spacing|40`, which core's default spacing scale makes 1rem), so the gutter relies on that preset: if a site changes its spacing scale, the gutter changes with it. `useRootPaddingAwareAlignments` is on, so full-width blocks still reach the edge. `contentSize` and `wideSize` are plain `1000px` and `1500px`. Change the gutter in that one place; never put it back into the widths.

@@ -1,0 +1,47 @@
+{
+	"$schema": "https://schemas.wp.org/wp/6.8/theme.json",
+	"version": 3,
+	"title": "Card link, filled",
+	"slug": "card-link-filled",
+	"blockTypes": [ "core/group" ],
+	"styles": {
+		"border": {
+			"color": "var:preset|color|primary-80-lighter",
+			"radius": "8px",
+			"style": "solid",
+			"width": "2px"
+		},
+		"color": {
+			"background": "var:preset|color|primary-90-lighter",
+			"text": "var:preset|color|black"
+		},
+		"spacing": {
+			"blockGap": "var:preset|spacing|30",
+			"padding": {
+				"bottom": "var:preset|spacing|50",
+				"left": "var:preset|spacing|50",
+				"right": "var:preset|spacing|50",
+				"top": "var:preset|spacing|50"
+			}
+		},
+		"elements": {
+			"link": {
+				"color": {
+					"text": "var:preset|color|primary-20-darker"
+				},
+				"typography": {
+					"textDecoration": "none"
+				},
+				":hover": {
+					"color": {
+						"text": "var:preset|color|primary-20-darker"
+					},
+					"typography": {
+						"textDecoration": "none"
+					}
+				}
+			}
+		},
+		"css": "position: relative; &:hover { border-color: var(--wp--preset--color--primary); } &:has(a:focus-visible) { border-color: var(--wp--preset--color--primary); outline: 3px solid var(--wp--preset--color--primary-20-darker); outline-offset: 3px; } & :is(h1, h2, h3, h4, h5, h6) a::after { content: ''; position: absolute; inset: 0; } & :is(h1, h2, h3, h4, h5, h6) a:focus-visible { outline: none; }"
+	}
+}

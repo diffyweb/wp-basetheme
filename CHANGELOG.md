@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0
+
+- Card link: "Card link" and "Card link, filled" block styles of Group (`styles/blocks/card-link.json`, `card-link-filled.json`) make a whole card one link. The card is a Group with one of these styles holding a heading whose text is a link; that link's `::after` is stretched over the card, so the card has one link, one tab stop (when the card holds no other link) and one name in the accessibility tree, and no script or stylesheet. Both have a 2px `primary-80-lighter` border, 8px radius, `spacing|50` padding, `spacing|30` gap, black text and `primary-20-darker` links without underline; "Card link" is `white` and "filled" is `primary-90-lighter`. On hover the border turns `primary` (same width, so nothing shifts) and "Card link" fills `primary-90-lighter`; keyboard focus on the title link draws a 3px `primary-20-darker` outline at a 3px offset around the card, with a `primary` border. Links elsewhere in the card sit under the stretched link, so a card carries one link. README "Card link" has the markup.
+- Theme version set to 0.4.0 in `style.css`.
+
 ## 0.3.1
 
 - Fix the `templateParts` entries in `theme.json`: `name` is now `header` and `footer`, matching `parts/header.html` and `parts/footer.html`, with the display labels in `title`.
