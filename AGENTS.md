@@ -84,6 +84,7 @@ This is a **block theme** -- WordPress renders pages entirely from block markup 
 | `inc/block-mods/*.php` | Block-layer modifications (supports, styles, unregistrations, render filters). Currently spacing supports for `core/template-part` and `core/post-content`. |
 | `bin/palette-ramp.php` | Prints the 19-entry tint and shade ramp for a new brand color, and checks every ramp in `theme.json` against the formula (`--check`). Plain PHP, no WordPress load. See the README Palette section. |
 | `style.css` | Theme metadata header only (name, version, requirements). Contains no CSS rules -- all styling is in theme.json. |
+| `styles/blocks/*.json` | Block style variations for Group: Card link and Card link, filled (whole-card links). See the README "Card link" section. |
 | `templates/single.html` | Single post template with featured-image cover block (70% dim overlay). |
 | `templates/index.html` | Default post-list: responsive grid (min 15rem columns), featured images, titles, pagination. |
 | `parts/header.html` | Flex layout: logo + site-title (left), navigation block ref (right), bottom border. |
@@ -96,6 +97,7 @@ This is a **block theme** -- WordPress renders pages entirely from block markup 
 - **Block markup only.** Templates are pure WordPress block comments in HTML. No PHP template tags, no `the_content()` calls, no template hierarchy hacks.
 - **Fluid typography.** Every font size has `min`/`max` fluid values. Do not use fixed sizes.
 - Palette: ramps, the rule for new brand colors and the generator are in the README "Palette" section; the formula lives only in `bin/palette-ramp.php`. After any palette edit run `php bin/palette-ramp.php --check theme.json`.
+- **Whole-card links** are the Group block styles Card link and Card link, filled (README "Card link"): one link per card, no script.
 - **Shortcodes over hardcoded values.** Use `[current_year]` in footer copyright rather than a hardcoded year.
 - **Prefer native platform features over JS libraries.** Before vendoring or enqueueing a script, check whether a native CSS / HTML feature covers the use case. If a third-party JS dependency is still required, vendor it locally under `assets/js/vendor/` with the upstream commit hash in the enqueue file's docblock — no CDN dependencies.
 - **One feature per inc/ file.** Shortcodes, enqueues, and block modifications each live in their own file under `inc/<category>/`. Filenames carry their category as a prefix (`shortcode-*.php`, `enqueue-*.php`, `block-mod-*.php`).
