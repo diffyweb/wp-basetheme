@@ -34,16 +34,20 @@
 - Add `bin/palette-ramp.php`, which prints the 19-entry ramp for a new brand color and checks every ramp in `theme.json` against the formula (`--check`). It is plain PHP (7.4 or newer, no WordPress load), run as `php bin/palette-ramp.php`. The README has a short Palette section; `AGENTS.md` just points to it.
 - Theme version set to 0.2.0 in `style.css` (it was 0.1.0 and untouched by earlier entries).
 
-## 0.1.0
+## 0.1.5
 
 - **Move text-balancing to the `wp-balance-text` companion plugin** — delete the theme's bespoke `assets/css/text-balance.css` + `inc/enqueues/enqueue-text-balance.php` (and the now-empty `assets/` and `inc/enqueues/` dirs). The feature now lives in [wp-balance-text](https://github.com/diffyweb/wp-balance-text): a *Balance* toggle in the editor's native Typography panel (one `editor.BlockEdit` filter, composes with any block style variation) plus a Settings page to pick block types balanced by default (H1–H6 on). One reusable home instead of a per-theme stylesheet copy. README/AGENTS updated to document it as the recommended companion plugin.
 - **Make `block-mod-spacing-supports` additive (stop clobbering native support)** — the filter overwrote `supports.spacing` wholesale, which on WP 7.0 replaced `core/post-content`'s richer *native* spacing (it includes `blockGap`) with a poorer `{margin, padding}`. It now only backfills when the block declares no spacing support, so it fills the gap for `core/template-part` (and `core/post-content` on the 6.8 floor) without overwriting core where native support exists.
 - **Flush default block-gap seams between sections** — add a `theme.json` `styles.css` rule, `.wp-site-blocks > *, .wp-block-template-part > * { margin-block-start: 0; }`, so top-level sections (header part → content → footer part) and template-part children butt flush and each section's own padding carries the vertical rhythm. Overrides WP's zero-specificity `:where()` block-gap rule via real-class specificity (0,1,0 > 0,0,0), leaving *inner* block-gaps (inside groups/columns) intact. Deliberately avoids `styles.spacing.blockGap`, whose token is coupled to those inner gaps and would collapse them too. Complements the existing `block-mod-spacing-supports` filter (which adds the margin/padding *controls*); this controls the *default* seam.
 
+## 0.1.4
+
 - **Session log capture** — initially saved as a per-file artifact under `context/2026-04-13-modularization-and-style-guide-session.md`, then corrected to the project-root `SESSIONLOG.md` convention used on sibling WP projects. `context/` is reserved for durable topic-scoped decision logs and research; `SESSIONLOG.md` is the rolling handoff log.
 - **`AGENTS.md` — add Session Continuity section** — instructs future sessions to read `SESSIONLOG.md` at start and append newest-first at end, with a four-section entry format (What was done / Current state / What's next / Lessons).
 - **`README.md` rewrite** — bring in sync with current architecture. Document the `inc/` modular layout, filename and function-naming conventions, `page-style-guide` custom template, text-balance utility, and block spacing supports. Expand the `theme.json` description to mention primary-blue palette, fluid typography, system font stack, and root-padding-aware alignments.
 - **Bump PHP requirement** from `5.7` (not a valid PHP version — there is no 5.7, PHP went from 5.6 to 7.0) to `7.4` in both `style.css` and `README.md`. `7.4` is the sensible floor for a WP 6.8+ theme that uses PHP 7.0+ null-coalescing in code.
+
+## 0.1.3
 
 - **Enable spacing supports on `core/template-part` and `core/post-content`** — add a `register_block_type_args` filter to `functions.php` so both blocks expose margin and padding controls in the Site Editor. Initially landed as an anonymous closure inline in `functions.php`; later extracted to `inc/block-mods/` (see modularization entry below).
 - **Scaffold `inc/<category>/` auto-loader** — introduce a modular layout. `functions.php` becomes a thin `glob()`-based bootstrap that `require_once`s every `inc/*/*.php`. Drop a file into a category directory and it loads — no registration step. Filename pattern: `<category-singular>-<feature>.php` (e.g. `shortcode-current-year.php`). Function-naming pattern: `wp_basetheme_<category>_<feature>()`. Each file guards with `defined( 'ABSPATH' ) || exit;` and registers its own hook.
@@ -55,8 +59,14 @@
 - **Text balancing: replace vendored JS with native CSS `text-wrap: balance`** — drop `assets/js/vendor/balancetext.min.js` and `inc/enqueues/enqueue-balance-text.php` in favor of a tiny enqueued stylesheet at `assets/css/text-balance.css` loaded via `inc/enqueues/enqueue-text-balance.php`. Canonical utility class is `.text-balance` (matches the stylesheet, enqueue file, and handle names); legacy `.balance-text` kept as a backward-compat alias. Default selectors match the former JS init (`h1`–`h6` + utility class). No JavaScript; degrades gracefully to normal wrapping in browsers without `text-wrap: balance` (pre-Chrome 114, pre-Firefox 121, pre-Safari 17.5). Relaxes the prior "no custom CSS" convention to "narrow utility stylesheets may be enqueued, one file per concern — design tokens still belong in `theme.json`."
 - **Style Guide page template** — add `templates/page-style-guide.html`, a custom page template registered via `theme.json > customTemplates` that renders every core block (h1–h6, lists, quotes, code/preformatted/verse, tables, buttons, images with default/wide/full alignment variants, gallery, cover, media & text, columns, details/summary, separator style variants, spacer) with the current `theme.json` settings. Selectable from the page template picker as "Style Guide." Template intentionally omits `wp:post-title` and `wp:post-content` so demo content lives in the template itself and can't be accidentally edited through the page editor.
 
+## 0.1.2
+
 - Add `AGENTS.md` with agent instructions; `CLAUDE.md`, `CODEX.md`, `GEMINI.md` symlink to it
 
+## 0.1.1
+
 - Rewrite README
+
+## 0.1.0
 
 - v0.1.0 initial commit — minimal FSE starter theme with grayscale palette, fluid typography, system font stack, utility shortcodes
